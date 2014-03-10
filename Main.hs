@@ -1,0 +1,31 @@
+{- |
+Module      :  Main
+Description :  Main module which allows access to all project euler riddles.
+Copyright   :  (c) Sebastian Witte
+License     :  WTFPL
+
+Maintainer  :  woozletoff@gmail.com
+Stability   :  experimental
+Portability :  portable
+
+This module gives convenient access to calculate the solution for any
+exisiting and solved project euler riddle.
+-}
+
+module Main (
+  main
+  ) where
+
+import qualified Euler.P001
+import qualified Euler.P002
+import qualified Euler.P003
+
+prettySolution (i, solution) =
+  do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
+     solution
+
+main = mapM_ prettySolution $
+       zip [1..] [ Euler.P001.solve
+                 , Euler.P002.solve
+                 , Euler.P003.solve
+                 ]
