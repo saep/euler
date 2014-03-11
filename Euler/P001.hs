@@ -17,8 +17,9 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 -}
 
-module Euler.P001 (
-  solve) where
+module Euler.P001
+       (solve
+       ) where
 
 import Euler.Formulae (sumTo)
 
