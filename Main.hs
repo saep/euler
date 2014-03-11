@@ -19,13 +19,16 @@ module Main (
 import qualified Euler.P001
 import qualified Euler.P002
 import qualified Euler.P003
+import qualified Euler.P004
 
 prettySolution (i, solution) =
   do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
      solution
 
+main :: IO ()
 main = mapM_ prettySolution $
        zip [1..] [ Euler.P001.solve
                  , Euler.P002.solve
                  , Euler.P003.solve
+                 , Euler.P004.solve
                  ]
