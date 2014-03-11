@@ -20,3 +20,11 @@ fib n = snd . foldl' fib' (1, 0) . dropWhile not $
       | p         = (f * (f + 2*g), ss)
       | otherwise = (ss, g * (2*f - g))
       where ss = f*f + g*g
+
+greatestCommonFactor = gcf
+
+gcf :: Int -> Int -> Int
+gcf a b
+  | b == 0 = a
+  | a == 0 = b
+  | otherwise = gcf b (a `mod` b)
