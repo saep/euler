@@ -12,9 +12,9 @@ This module gives convenient access to calculate the solution for any
 exisiting and solved project euler riddle.
 -}
 
-module Main (
-  main
-  ) where
+module Main
+       (main
+       ) where
 
 import qualified Euler.P001
 import qualified Euler.P002
@@ -22,6 +22,7 @@ import qualified Euler.P003
 import qualified Euler.P004
 import qualified Euler.P005
 import qualified Euler.P006
+import qualified Euler.P007
 
 prettySolution (i, solution) =
   do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
@@ -35,4 +36,5 @@ main = mapM_ prettySolution $
                  , Euler.P004.solve
                  , Euler.P005.solve
                  , Euler.P006.solve
+                 , Euler.P007.solve
                  ]
