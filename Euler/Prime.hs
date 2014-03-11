@@ -72,3 +72,7 @@ findNthPrime n ps
   | otherwise = ps V.! (n-1)
   where
     n' = max (8 * n) (2 * V.last ps)
+
+-- | Two integers are coprime if their common denominator is 1.
+coPrime :: Integral n => n -> n -> Bool
+coPrime a b = 1 == gcd a b
