@@ -6,6 +6,7 @@ import qualified Data.Vector as V
 
 type BitSet = Integer
 type Offset = Int
+type PrimeSieve = V.Vector Int
 
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
@@ -24,7 +25,7 @@ factorizeSingleNumber = f [] 2
 
 
 -- | Create a list of primes using the sieve of Eratosthenes.
-sieveOfEratosthenes :: Int -> V.Vector Int
+sieveOfEratosthenes :: Int -> PrimeSieve
 sieveOfEratosthenes n =
   let primeBitSet = foldl' (markPrime n Nothing 0) 3 [2..(sqrt' n)]
   in V.unfoldr (mkvec n 0 primeBitSet) 2
@@ -41,7 +42,7 @@ mkvec n offset bs i
 
 -- | Create a list of primes using the sieve of Erathosthenes with a
 -- precalculated vector of primes.
-sieveOfEratosthenes' :: Int -> V.Vector Int -> V.Vector Int
+sieveOfEratosthenes' :: Int -> PrimeSieve -> PrimeSieve
 sieveOfEratosthenes' n ps
   | V.null ps = sieveOfEratosthenes n
   | n <= maxp = ps
@@ -58,6 +59,10 @@ sieveOfEratosthenes' n ps
                   bitset = markPrime n (Just start) offset bs p
               in foldl' (markPrime n Nothing offset) bitset [offset..(sqrt' n)]
 
+-- | Mark a number in the BitSet starting at an offset as not
+-- prime. If you provie anything other than Nothing as the second
+-- argument, then the value will be used as the start value and is not
+-- skipped.
 markPrime :: Int -> Maybe Int -> Offset -> BitSet -> Int -> BitSet
 markPrime n (Just start) offset bs p =
   foldl' setBit bs $ fmap (subtract offset) [start,start+p..n]
