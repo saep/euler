@@ -20,7 +20,7 @@ module Euler.P007
        ( solve
        ) where
 
-import Euler.Prime (sieveOfEratosthenes, findNthPrime)
+import Euler.Prime (primes)
 
 solve :: IO ()
-solve = print . findNthPrime 10001 $ sieveOfEratosthenes 2
+solve = print $ primes !! 10000 -- Index starting at 0!
