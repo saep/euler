@@ -25,6 +25,7 @@ import qualified Euler.P006
 import qualified Euler.P007
 import qualified Euler.P008
 import qualified Euler.P009
+import qualified Euler.P010
 
 prettySolution (i, solution) =
   do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
@@ -41,4 +42,5 @@ main = mapM_ prettySolution $
                  , Euler.P007.solve
                  , Euler.P008.solve
                  , Euler.P009.solve
+                 , Euler.P010.solve
                  ]
