@@ -14,9 +14,8 @@ Problem 13
 Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 -}
 module Euler.P013
-       -- ( solve
-       -- ) where
-       where
+       ( solve
+       ) where
 
 -- | The maximum amount of carry that can be created is (when starting
 -- from the right) 900. If the second column of digits is all nines as
