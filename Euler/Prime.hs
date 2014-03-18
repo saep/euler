@@ -8,7 +8,8 @@ module Euler.Prime
        , sunion
        ) where
 
-import Data.List hiding (union)
+import Data.List
+import Euler.SList
 
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
@@ -46,16 +47,6 @@ coPrime a b = 1 == gcd a b
 
 primes :: [Int]
 primes = primesTMWE
-
--- | Union on sorted list.
-sunion :: Ord a => [a] -> [a] -> [a]
-sunion (x:xs) (y:ys) = case (compare x y) of
-  LT -> x : sunion xs (y:ys)
-  EQ -> x : sunion xs ys
-  GT -> y : sunion (x:xs) ys
-
-sunion xs [] = xs
-sunion [] ys = ys
 
 _Y :: (t -> t) -> t
 _Y g = g (_Y g)
