@@ -5,6 +5,7 @@ module Euler.Prime
        , divisors
        , coPrime
        , primes
+       , sunion
        ) where
 
 import Data.List hiding (union)
@@ -46,23 +47,24 @@ coPrime a b = 1 == gcd a b
 primes :: [Int]
 primes = primesTMWE
 
-union :: Ord a => [a] -> [a] -> [a]
-union (x:xs) (y:ys) = case (compare x y) of
-  LT -> x : union xs (y:ys)
-  EQ -> x : union xs ys
-  GT -> y : union (x:xs) ys
+-- | Union on sorted list.
+sunion :: Ord a => [a] -> [a] -> [a]
+sunion (x:xs) (y:ys) = case (compare x y) of
+  LT -> x : sunion xs (y:ys)
+  EQ -> x : sunion xs ys
+  GT -> y : sunion (x:xs) ys
 
-union xs [] = xs
-union [] ys = ys
+sunion xs [] = xs
+sunion [] ys = ys
 
 _Y :: (t -> t) -> t
 _Y g = g (_Y g)
 
 joinT :: Ord a => [[a]] -> [a]
-joinT ((x:xs):t) = x : (union xs . joinT . pairs) t
+joinT ((x:xs):t) = x : (sunion xs . joinT . pairs) t
   where
     pairs :: Ord a => [[a]] -> [[a]]
-    pairs (xxs:yys:tt) = union xxs yys : pairs tt
+    pairs (xxs:yys:tt) = sunion xxs yys : pairs tt
 
 primesTMWE :: [Int]
 primesTMWE = [2,3,5,7] ++ _Y ((11:) . tail . gapsW 11 wheel
