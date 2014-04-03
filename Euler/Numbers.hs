@@ -14,6 +14,8 @@ module Euler.Numbers
        ( WithDivisors
        , initialWithDivisorsState
        , isAmicable
+       , isPerfect
+       , isAbundant
        , amicableNumbersTo
        , module Control.Monad.State
        ) where
@@ -48,12 +50,20 @@ isAmicable n = do
     then return False
     else (==n) <$> sumDivisors dn
 
+isPerfect :: Int -> WithDivisors Bool
+isPerfect n = (n==) <$> sumDivisors n
+
+isAbundant :: Int -> WithDivisors Bool
+isAbundant n = (n<) <$> sumDivisors n
+
 -- | Calculate the sum of divisors of n by using the (possibly)
 -- precalculated state.
 sumDivisors :: Int -> WithDivisors Int
-sumDivisors n = get >>= \m -> case M.lookup n m of
-  Just xs -> return $ sum xs
-  Nothing -> modify (mkDivisors n) >> sumDivisors n
+sumDivisors n = do
+  m <- get
+  case M.lookup n m of
+    Just xs -> return $ sum xs
+    Nothing -> modify (mkDivisors n) >> sumDivisors n
 
 -- | Internal function to calculate a new divisormap with the value n
 -- by using the precalculated map m.
