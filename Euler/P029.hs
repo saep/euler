@@ -33,14 +33,20 @@ module Euler.P029
 import Data.Bits
 import qualified Data.IntSet as S
 
+type BitSet = Integer
+
 solve :: IO ()
 -- This one works fast, but it is quadratic and this problem can be solved more elegantly.
 -- solve = print . length . snub $ sort [ a^b | a <- [2..100], b <- [2..100] ]
 solve = print $ distinctPowers 100 100
 
 distinctPowers :: Int -> Int -> Int
-distinctPowers nmax pmax = (nmax-1)*(pmax-1)
-                           - (sum . fmap (\(p,ns) -> ns * duplicatesForPowerNumber nmax p) $ perfectPowerNumbers nmax pmax)
+distinctPowers nmax pmax =
+  let maxCombinations = (nmax-1) * (pmax-1)
+      ps = perfectPowerNumbers nmax pmax
+      dupsForPowerNumbers (p,ns) = ns * duplicatesForPowerNumber nmax p
+      allDups = sum $ fmap dupsForPowerNumbers ps
+  in maxCombinations - allDups
 
 -- | Calculate the numbers which are perfect powers.  A non perfect
 -- power of 2 is 16. It is 4 to the power of 2, but 4 itself is 2 to
@@ -51,7 +57,7 @@ perfectPowerNumbers nmax pmax = go [p,p-1..2] 0
     p :: Int
     p = (floor . logBase 2) (fromIntegral pmax :: Double)
 
-    go :: [Int] -> Integer -> [(Int, Int)]
+    go :: [Int] -> BitSet -> [(Int, Int)]
     go (x:xs) bs = let pns = filter (not . testBit bs) . takeWhile (<=nmax) $ fmap (^x) [2..]
                    in (x, length pns) : go xs (foldl setBit bs pns)
     go _ _ = []
