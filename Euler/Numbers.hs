@@ -17,6 +17,7 @@ module Euler.Numbers
        , isPerfect
        , isAbundant
        , amicableNumbersTo
+       , toDigits
        , module Control.Monad.State
        ) where
 
@@ -83,3 +84,11 @@ mkDivisors n m
     fd = (head . factors) n -- first divisor
     p = n `div` fd          -- previous
     pd = M.lookup p m       -- previous divisors
+
+-- | Convert an integer to a list of its digits.
+toDigits :: Int -> [Int]
+toDigits n = go (n `divMod` 10)
+  where
+    go (d,r)
+      | d == 0 = [r]
+      | otherwise = r:go (d `divMod` 10)

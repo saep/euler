@@ -32,6 +32,7 @@ module Euler.P030
 import Control.Monad
 import Data.List (sort)
 import Data.Maybe
+import Euler.Numbers (toDigits)
 
 solve :: IO ()
 solve = print . sum $ nthPowerDigits 5
@@ -58,12 +59,4 @@ digitSumEqualsNumber :: Int -> [Int] -> Maybe Int
 digitSumEqualsNumber p ds = guard (digits == ds) >> return dsum
   where
     dsum = sum $ fmap (^p) ds
-    digits = sToDigits dsum
-
--- | Convert an integer to a sorted list of its digits.
-sToDigits :: Int -> [Int]
-sToDigits n = sort $ go (n `divMod` 10)
-  where
-    go (d,r)
-      | d == 0 = [r]
-      | otherwise = r:go (d `divMod` 10)
+    digits = sort $ toDigits dsum
