@@ -17,7 +17,9 @@ sqrt' :: Integral n => n -> n
 sqrt' = floor . (sqrt :: Double -> Double) . fromIntegral
 
 isPrime :: Int -> Bool
-isPrime = (==) 1 . length . factorizeSingleNumber
+isPrime n = n /= 1 && foldr test True [2..sqrt' n]
+  where
+    test d r = n `mod` d /= 0 && r
 
 -- | Factorize a single number by testing all nmbers up to the square
 -- root of the given number.
