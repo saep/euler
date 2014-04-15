@@ -29,8 +29,8 @@ module Euler.P032
        ) where
 
 import Data.Bits
-import Data.List (nub, foldl', sort, (\\), group)
-import Euler.Numbers (toDigits)
+import Data.List (nub, sort, (\\), group)
+import Euler.Numbers (toDigits, toNum)
 
 solve :: IO ()
 solve = print . sum . fmap head . group . sort $ pandigitalProducts 9
@@ -64,10 +64,6 @@ partition :: Int -> Int -> [Int] -> (Int, Int, [Int])
 partition i j xs = let (a,r) = splitAt i xs
                        (b,c) = splitAt (j-i) r
                    in (toNum a, toNum b,c)
-
--- Only works for lists with elements in [0..9].
-toNum :: [Int] -> Int
-toNum = fst . foldl' (\(acc,n) x -> (acc+x*n, n*10)) (0,1) . reverse
 
 candidates :: Int -> [(Int, Int, [Int])]
 candidates n = [ partition i j (ps++([1..n] \\ ps))

@@ -18,13 +18,14 @@ module Euler.Numbers
        , isAbundant
        , amicableNumbersTo
        , toDigits
+       , toNum
        , module Control.Monad.State
        ) where
 
 import Control.Applicative
 import Data.Maybe
 import Euler.SList
-import Data.List (insert)
+import Data.List (insert, foldl')
 import Euler.Prime
 import Control.Monad.State
 import qualified Data.IntMap as M
@@ -92,3 +93,8 @@ toDigits n = go (n `divMod` 10)
     go (d,r)
       | d == 0 = [r]
       | otherwise = r:go (d `divMod` 10)
+
+-- | Convert a digit list to an Int.  Only works for lists with
+-- elements in [0..9].
+toNum :: [Int] -> Int
+toNum = fst . foldl' (\(acc,n) x -> (acc+x*n, n*10)) (0,1) . reverse
