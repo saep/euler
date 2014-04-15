@@ -1,6 +1,7 @@
 module Euler.Prime
        ( sqrt'
        , factorizeSingleNumber
+       , isPrime
        , factors
        , divisors
        , coPrime
@@ -14,6 +15,9 @@ import Euler.SList
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
 sqrt' = floor . (sqrt :: Double -> Double) . fromIntegral
+
+isPrime :: Int -> Bool
+isPrime = (==) 1 . length . factorizeSingleNumber
 
 -- | Factorize a single number by testing all nmbers up to the square
 -- root of the given number.
