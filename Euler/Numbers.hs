@@ -19,6 +19,7 @@ module Euler.Numbers
        , amicableNumbersTo
        , toDigits
        , toNum
+       , pythagoreanTriplets
        , module Control.Monad.State
        ) where
 
@@ -98,3 +99,23 @@ toDigits n = go (n `divMod` 10)
 -- elements in [0..9].
 toNum :: [Int] -> Int
 toNum = fst . foldl' (\(acc,n) x -> (acc+x*n, n*10)) (0,1) . reverse
+
+-- | The following formula describes how to calculate the pythagorean
+-- triplets if m and n are coprime (i.e. their greatest common
+-- denominator is 1).
+--
+-- Assume that m > n:
+-- a = k (m^2 - n^2)
+-- b = 2 k m n
+-- c = k (m^2 + n^2)
+pythagoreanTriplets :: [[(Int, Int, Int)]]
+pythagoreanTriplets = go 3 2
+  where
+    go m n
+      | m <= n = go (m+1) 1
+      | coPrime m n = fmap (\k -> (a k,b k,c k)) [1..] : go m (n+1)
+      | otherwise = go m (n+1)
+      where
+        a k = k*(m*m - n*n)
+        b k = k*2*m*n
+        c k = k*(m*m + n*n)
