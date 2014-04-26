@@ -27,9 +27,9 @@ factorizeSingleNumber :: Int -> [Int]
 factorizeSingleNumber = f [] 2
   where
     f ps p n
-      | r == 0    = f (p:ps) p d
-      | p > (sqrt' n) = reverse (n:ps)
-      | otherwise = f ps (p+1) n
+      | r == 0      = f (p:ps) p d
+      | p > sqrt' n = reverse (n:ps)
+      | otherwise   = f ps (p+1) n
       where
         (d,r) = n `divMod` p
 
@@ -38,7 +38,7 @@ factors x = f (sqrt' x) primes x
   where
     f :: Int-> [Int] -> Int -> [Int]
     f sqrtn (p:ps) n
-      | p > sqrtn  = if n > 1 then [n] else []
+      | p > sqrtn  = [ n | n > 1 ]
       | r == 0 = p : f (sqrt' d) (p:ps) d
       | otherwise = f sqrtn ps n
       where
