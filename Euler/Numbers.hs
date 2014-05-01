@@ -22,6 +22,7 @@ module Euler.Numbers
        , pythagoreanTriplets
        , pentagonal
        , triangular
+       , hexagonal
        , module Control.Monad.State
        ) where
 
@@ -129,3 +130,5 @@ pentagonal n = n * (3*n - 1) `div` 2
 triangular :: Integral a => a -> a
 triangular n = n * (n+1) `div` 2
 
+hexagonal :: Integral a => a -> a
+hexagonal n = n*(2*n-1)
