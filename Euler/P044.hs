@@ -27,7 +27,6 @@ module Euler.P044
        ( solve
        ) where
 
-import Control.Monad
 import Data.Maybe
 import Data.Monoid
 import Data.IntSet (IntSet, member, insert)
@@ -37,7 +36,7 @@ solve :: IO ()
 solve = print solution
 
 solution :: Int
-solution = uncurry (subtract) $ findPair mempty [] [1..]
+solution = uncurry subtract $ findPair mempty [] [1..]
 
 findPair :: IntSet -> [Int] -> [Int] -> (Int, Int)
 findPair m ps (z:zs) =
