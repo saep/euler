@@ -1,4 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
 {- |
 Module      :  Euler.P040
 Description :  Problem 040

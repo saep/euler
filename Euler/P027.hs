@@ -84,5 +84,5 @@ isPrime n = do
   (bs, ps) <- get
   let (sps, bps) = span (<=n) ps
       bs' = foldl setBit bs sps
-  when ((not . null) sps) $ put (bs', bps)
+  unless (null sps) $ put (bs', bps)
   return $ testBit bs' n

@@ -36,7 +36,7 @@ module Euler.P038
 import Data.List (delete)
 
 solve :: IO ()
-solve = print $ maxPandigital
+solve = print maxPandigital
 
 -- | The first number must be a 9, because the example on the webpage
 -- starts with a 9 and we search for the largest such number which
@@ -64,9 +64,9 @@ solve = print $ maxPandigital
 maxPandigital :: Int
 maxPandigital = maximum $ 918273645 :
                 take 1 [ read c2c
-                       | x <- ['3','2']
-                       , y <- (delete x ['7','6'..'2'])
-                       , z <- (delete x (delete y ['7','6'..'2']))
-                       , let c = (read ['9',x,y,z]) :: Int
+                       | x <- "32"
+                       , y <- delete x ['7','6'..'2']
+                       , z <- delete x (delete y ['7','6'..'2'])
+                       , let c = read ['9',x,y,z] :: Int
                              c2c = show c ++ show (2*c)
                        , all (`elem` c2c) ['1'..'9'] ]

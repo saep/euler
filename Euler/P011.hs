@@ -29,7 +29,7 @@ import Data.List
 
 solve :: IO ()
 solve = print . maxProduct =<<
-        fmap (fmap read) . fmap words . lines <$> readFile "text/P011.txt"
+        fmap (fmap read . words) . lines <$> readFile "text/P011.txt"
 
 maxProduct :: [[Int]] -> Int
 maxProduct m = maximum $ concatMap ($ m) [ diagonalProducts
@@ -40,7 +40,7 @@ maxProduct m = maximum $ concatMap ($ m) [ diagonalProducts
 
 diagonalProducts :: [[Int]] -> [Int]
 diagonalProducts m@(r1:(_:r2):(_:_:r3):(_:_:_:r4):_) =
-  (verticalProducts [r1,r2,r3,r4]) ++ diagonalProducts (tail m)
+  verticalProducts [r1,r2,r3,r4] ++ diagonalProducts (tail m)
 diagonalProducts _ = []
 
 verticalProducts :: [[Int]] -> [Int]

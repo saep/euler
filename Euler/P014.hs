@@ -49,9 +49,9 @@ findLongestCollatz _ (longest, _) _ = longest
 updateMap :: [Int] -> (Int, Int) -> M.IntMap Int -> (Int, Int, M.IntMap Int)
 updateMap cs (longest, len) m =
   let (xs, l:_) = span (\k -> isNothing (M.lookup k m)) cs
-      len' = length xs + (fromJust $ M.lookup l m)
+      len' = length xs + fromJust (M.lookup l m)
       toInsert = zip xs [len',(len'-1)..]
-      m' = foldr (\(n,ln) -> M.insert n ln) m toInsert
+      m' = foldr (uncurry M.insert) m toInsert
   in case compare len len' of
     LT -> (head xs, len', m')
     _ -> (longest, len, m')

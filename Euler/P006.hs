@@ -30,4 +30,4 @@ module Euler.P006
 import Euler.Formulae (sumTo, squareOfSum)
 
 solve :: IO ()
-solve = print . abs $ squareOfSum 100 - (sumTo 100)^2
+solve = print . abs $ squareOfSum 100 - sumTo 100^2

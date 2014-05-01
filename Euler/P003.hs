@@ -16,7 +16,7 @@ What is the largest prime factor of the number 600851475143 ?
 
 -}
 module Euler.P003
-       (solve
+       ( solve
        ) where
 
 import Euler.Prime

@@ -44,5 +44,4 @@ base10candidates n = concat [ pals (x:xs) | x <- [1,3..9], xs <- pick ((n`div`2)
     pick 0 = [[]]
     pick l = [ x:xs | x <- [0..9], xs <- pick (l-1) ]
 
-    pals xs = let p = fmap toNum [xs ++ reverse xs, xs ++ tail (reverse xs)]
-              in p `seq` p
+    pals xs = fmap toNum [xs ++ reverse xs, xs ++ tail (reverse xs)]

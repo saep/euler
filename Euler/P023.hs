@@ -57,6 +57,6 @@ abundantSumpairs limit abundantNumbers =
 
   where
     step :: (S.Set Int, [Int]) -> Int -> (S.Set Int, [Int])
-    step (xs, (a:as)) n = let aps = S.fromAscList
+    step (xs, a:as) n = let aps = S.fromAscList
                                     . takeWhile (<= limit) $ fmap (+n) (a:as)
                           in (xs S.\\ aps, as)

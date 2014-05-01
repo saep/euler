@@ -21,7 +21,7 @@ not exceed four million, find the sum of the even-valued terms.
 
 -}
 module Euler.P002
-       (solve
+       ( solve
        ) where
 
 import Euler.Formulae

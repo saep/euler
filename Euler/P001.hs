@@ -18,7 +18,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 -}
 
 module Euler.P001
-       (solve
+       ( solve
        ) where
 
 import Euler.Formulae (sumTo)
@@ -27,4 +27,4 @@ solve :: IO ()
 solve = print $ f 3 + f 5 - f (3*5)
   where
     limit = 999 :: Int
-    f n = n * (sumTo (limit `div` n))
+    f n = n * sumTo (limit `div` n)

@@ -53,7 +53,7 @@ p12 dlast (x:xs) =
     m <- get
     let fx = factors x
         p = head fx
-        mx = maybe fx (\xdp -> insert p xdp) $ M.lookup (x `div` p) m
+        mx = maybe fx (insert p) $ M.lookup (x `div` p) m
         effectiveFactors = if even x then tail mx else mx
         divisorsx = (product . fmap (succ . length) . group) effectiveFactors
 

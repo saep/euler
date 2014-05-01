@@ -24,4 +24,4 @@ module Euler.P005
 import Euler.Formulae (gcf)
 
 solve :: IO ()
-solve = print $ foldl1 (\a b -> a * (b `div` (gcf a b))) [1..20]
+solve = print $ foldl1 (\a b -> a * b `div` gcf a b) [1..20]

@@ -22,12 +22,13 @@ module Euler.P039
        ( solve
        ) where
 
+import Control.Arrow ((&&&))
 import Data.List (group, sort)
 import Euler.Numbers (pythagoreanTriplets)
 
 solve :: IO ()
 solve = print . snd . maximum
-        . fmap (\ns -> (length ns, head ns))
+        . fmap (length &&& head)
         . group . sort
         . concat . takeWhile (not . null)
         . fmap (takeWhile (<= 1000))

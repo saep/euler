@@ -22,7 +22,7 @@ module Euler.P034
        ( solve
        ) where
 
-import Data.List (sort)
+import Data.List (sortBy)
 import Euler.Numbers (toDigits)
 import Data.Vector (Vector, (!))
 import qualified Data.Vector as V
@@ -39,7 +39,7 @@ fac :: Int -> Int
 fac n = fd ! n
 
 isFactorialDigitSum :: [Int] -> Bool
-isFactorialDigitSum xs = xs == (reverse . sort . toDigits . sum . fmap fac) xs
+isFactorialDigitSum xs = xs == (sortBy (flip compare) . toDigits . sum . fmap fac) xs
 
 digitFactorialCandidates :: Int -> [[Int]]
 digitFactorialCandidates n = [ x:xs
