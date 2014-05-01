@@ -20,6 +20,8 @@ module Euler.Numbers
        , toDigits
        , toNum
        , pythagoreanTriplets
+       , pentagonal
+       , triangular
        , module Control.Monad.State
        ) where
 
@@ -119,3 +121,11 @@ pythagoreanTriplets = go 3 2
         a k = k*(m*m - n*n)
         b k = k*2*m*n
         c k = k*(m*m + n*n)
+
+pentagonal :: Integral a => a -> a
+pentagonal n = n * (3*n - 1) `div` 2
+
+-- | sum_{k=1}^n k
+triangular :: Integral a => a -> a
+triangular n = n * (n+1) `div` 2
+
