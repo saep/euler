@@ -48,7 +48,7 @@ findPair m ps (z:zs) =
 findD :: IntSet -> [Int] -> Int -> Maybe (Int, Int)
 findD _ [] _ = Nothing
 findD m (pk:pks) pz
-    | 2*pk - pz < 0 = Nothing
+    | 2*pk < pz = Nothing
     | (2*pk - pz) `member` m && (pz - pk) `member` m = Just (pz - pk, pk)
     | otherwise = findD m pks pz
 
