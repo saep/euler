@@ -30,36 +30,30 @@ module Euler.P044
 import Control.Monad
 import Data.Maybe
 import Data.Monoid
-import Data.IntMap (IntMap)
-import qualified Data.IntMap as M
+import Data.IntSet (IntSet, member, insert)
 import Euler.Numbers (pentagonal)
 
 solve :: IO ()
-solve = print $ (\(j,k) -> pentagonal k - pentagonal j) solution
+solve = print solution
 
-solution :: (Int, Int)
-solution = findPair mempty [] [1..]
+solution :: Int
+solution = uncurry (subtract) $ findPair mempty [] [1..]
 
-findPair :: IntMap Int -> [Int] -> [Int] -> (Int, Int)
+findPair :: IntSet -> [Int] -> [Int] -> (Int, Int)
 findPair m ps (z:zs) =
     let pz = pentagonal z
-        m' = M.insert pz z m
+        m' = insert pz m
     in fromMaybe (findPair m' (pz:ps) zs) $ findD m' ps pz
 
 -- p(z) = p(j) + p(k) <=> p(j) = p(z) - p(k)
-findD :: IntMap Int -> [Int] -> Int -> Maybe (Int, Int)
+findD :: IntSet -> [Int] -> Int -> Maybe (Int, Int)
 findD _ [] _ = Nothing
 findD m (pk:pks) pz
-    | 2*pk - pz < 0 || (2*pk - pz) `M.member` m = pair m pz pk
+    | 2*pk - pz < 0 = Nothing
+    | (2*pk - pz) `member` m && (pz - pk) `member` m = Just (pz - pk, pk)
     | otherwise = findD m pks pz
 
 -- p(z) - p(k) = p(j)
 -- p(k) - p(j) = p(k) - p(z) + p(k) = 2p(k) - p(z)
-
-pair :: IntMap Int -> Int -> Int -> Maybe (Int, Int)
-pair m pz pk = do
-    j <- (pz - pk) `M.lookup` m
-    guard $ (pk - pentagonal j) `M.member` m
-    return (j, floor (sqrt (24*fromIntegral pk)) `div` 6)
 
 
