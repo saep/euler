@@ -42,7 +42,7 @@ module Euler.P027
 import Control.Monad.State
 import Data.Bits
 import Data.List (maximumBy)
-import Euler.Prime
+import Euler.Prime hiding (isPrime)
 
 -- Each b must definitively be prime as for n = 0, the function can
 -- only return primes if b is prime itself.
