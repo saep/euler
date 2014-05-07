@@ -70,6 +70,7 @@ import qualified Euler.P051
 import qualified Euler.P052
 import qualified Euler.P053
 import qualified Euler.P054
+import qualified Euler.P055
 
 prettySolution :: (Int, IO ()) -> IO ()
 prettySolution (i, solution) =
@@ -132,4 +133,5 @@ main = mapM_ prettySolution $
                  , Euler.P052.solve
                  , Euler.P053.solve
                  , Euler.P054.solve
+                 , Euler.P055.solve
                  ]
