@@ -40,13 +40,13 @@ import Euler.SList
 import Euler.Numbers
 import Euler.Prime
 
-solve :: IO ()
+solve :: IO Int
 solve =
   let limit = 28123
       seed = [12..limit] `sremoveAll` primes
       -- abundant numbers
       as = evalState (filterM isAbundant seed) (initialWithDivisorsState limit)
-  in print $ abundantSumpairs limit as
+  in return $ abundantSumpairs limit as
 
 -- | Given an upper limit and a list of abundant numbers, calculate
 -- all the pairs of two abundant numbers.

@@ -23,8 +23,8 @@ module Euler.P056
 
 import Data.Char
 
-solve :: IO ()
-solve = print $ maximum [ digitSum (a^b) | a <- [1..99] , b <- [1..99] ]
+solve :: IO Int
+solve = return $ maximum [ digitSum (a^b) | a <- [1..99] , b <- [1..99] ]
 
 digitSum :: Integer -> Int
 digitSum = sum . fmap digitToInt . show

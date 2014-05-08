@@ -33,10 +33,10 @@ module Euler.P042
 import Control.Applicative
 import Data.Char
 
-solve :: IO ()
+solve :: IO Int
 solve = do
   ws <- read . (++"]") . filter (/= '\n') . ('[':) <$> readFile "text/words.txt"
-  print . length $ filter isTriangularWord ws
+  return . length $ filter isTriangularWord ws
 
 wordSum :: String -> Int
 wordSum = sum . fmap (subtract (ord 'A' - 1) . ord . toUpper)

@@ -42,8 +42,8 @@ module Euler.P053
 -- c n (r+1) = n! / ((r+1)r!(n-1-r)!)
 -- = (n-r)/(r+1) * c n r
 --
-solve :: IO ()
-solve = print . sum $ f (23, 9, (1144066 * 5) `div` 7)
+solve :: IO Int
+solve = return . sum $ f (23, 9, (1144066 * 5) `div` 7)
 
 f :: (Int, Int, Int) -> [Int]
 f (n,r,cnr)

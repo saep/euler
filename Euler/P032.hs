@@ -32,8 +32,8 @@ import Data.Bits
 import Data.List (nub, sort, (\\), group)
 import Euler.Numbers (toDigits, toNum)
 
-solve :: IO ()
-solve = print . sum . fmap head . group . sort $ pandigitalProducts 9
+solve :: IO Int
+solve = return . sum . fmap head . group . sort $ pandigitalProducts 9
 
 pandigitalProducts :: Int -> [Int]
 pandigitalProducts n = fmap (\(a,b,_) -> a*b) . filter isPandigital $ candidates n

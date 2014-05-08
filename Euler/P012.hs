@@ -44,8 +44,8 @@ import Euler.Prime
 import qualified Data.Map as M
 import Control.Monad.State
 
-solve :: IO ()
-solve = print $ evalState (p12 1 [2..]) M.empty
+solve :: IO Int
+solve = return $ evalState (p12 1 [2..]) M.empty
 
 p12 :: Int -> [Int] -> State (M.Map Int [Int]) Int
 p12 dlast (x:xs) =

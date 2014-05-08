@@ -37,8 +37,8 @@ import qualified Data.IntMap as M
 import Data.IntSet (IntSet)
 import qualified Data.IntSet as S
 
-solve :: IO ()
-solve = print . evalState (find [] 2) $ M.singleton 1 mempty
+solve :: IO Int
+solve = return . evalState (find [] 2) $ M.singleton 1 mempty
 
 find :: [Int] -> Int -> State (IntMap IntSet) Int
 find fs n = do

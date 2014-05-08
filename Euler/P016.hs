@@ -21,5 +21,5 @@ module Euler.P016
 
 import Data.Char
 
-solve :: IO ()
-solve = print . sum . fmap digitToInt . show $ 2^1000
+solve :: IO Int
+solve = return . sum . fmap digitToInt . show $ 2^1000

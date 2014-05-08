@@ -25,7 +25,7 @@ module Euler.P009
 
 import Euler.Numbers (pythagoreanTriplets)
 
-solve :: IO ()
-solve = print . (\(a,b,c) -> a*b*c) . head
+solve :: IO Int
+solve = return . (\(a,b,c) -> a*b*c) . head
         . filter (\(a,b,c) -> a+b+c == 1000)
         $ fmap (head . dropWhile (\(a,b,c) -> a+b+c < 1000)) pythagoreanTriplets

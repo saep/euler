@@ -35,10 +35,10 @@ import qualified Data.IntSet as S
 
 type BitSet = Integer
 
-solve :: IO ()
+solve :: IO Int
 -- This one works fast, but it is quadratic and this problem can be solved more elegantly.
--- solve = print . length . snub $ sort [ a^b | a <- [2..100], b <- [2..100] ]
-solve = print $ distinctPowers 100 100
+-- solve = return . length . snub $ sort [ a^b | a <- [2..100], b <- [2..100] ]
+solve = return $ distinctPowers 100 100
 
 distinctPowers :: Int -> Int -> Int
 distinctPowers nmax pmax =

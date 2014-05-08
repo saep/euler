@@ -43,8 +43,8 @@ module Euler.P055
        ( solve
        ) where
 
-solve :: IO ()
-solve = print $ length [ () | x <- [6..9999], (not . isLychrel) x ]
+solve :: IO Int
+solve = return $ length [ () | x <- [6..9999], (not . isLychrel) x ]
 
 
 isLychrel :: Integer -> Bool

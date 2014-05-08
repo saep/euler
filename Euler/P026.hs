@@ -39,8 +39,8 @@ module Euler.P026
 import qualified Data.IntMap as M
 import Data.List (maximumBy)
 
-solve :: IO ()
-solve = print . snd . maximumBy (\(x,_) (y,_) -> compare x y) $
+solve :: IO Int
+solve = return . snd . maximumBy (\(x,_) (y,_) -> compare x y) $
         fmap (\x -> (reciprocalCycleLength x, x)) [999,998..1]
 
 -- | The function d calculates the first number, for which @x@ is

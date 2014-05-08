@@ -35,8 +35,8 @@ module Euler.P038
 
 import Data.List (delete)
 
-solve :: IO ()
-solve = print maxPandigital
+solve :: IO Int
+solve = return maxPandigital
 
 -- | The first number must be a 9, because the example on the webpage
 -- starts with a 9 and we search for the largest such number which

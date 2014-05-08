@@ -35,8 +35,8 @@ import Euler.Prime (isPrime)
 
 type PatternNumber = String
 
-solve :: IO ()
-solve = print problem51
+solve :: IO Int
+solve = return problem51
 
 {- Observations
 * The number of wildcars must be a multiple of 3 as otherwise you can only

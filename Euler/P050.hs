@@ -28,8 +28,8 @@ module Euler.P050
 
 import Euler.Prime (isPrime)
 
-solve :: IO ()
-solve = print $ snd findLongestConsecutivePrime
+solve :: IO Int
+solve = return $ snd findLongestConsecutivePrime
 
 primeStream :: [Int]
 primeStream = 2 : [ x | x <- [3,5..], isPrime x ]

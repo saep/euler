@@ -30,10 +30,10 @@ import qualified Data.Vector as V
 fd :: Vector Int
 fd = V.fromList $ fmap (\n -> product [1..n]) [0..9]
 
-solve :: IO ()
+solve :: IO Int
 solve = let cs = takeWhile (not . null) $ fmap digitFactorialCandidates [2..]
             fds = filter isFactorialDigitSum $ concat cs
-        in print . sum $ fmap (sum . fmap fac) fds
+        in return . sum $ fmap (sum . fmap fac) fds
 
 fac :: Int -> Int
 fac n = fd ! n

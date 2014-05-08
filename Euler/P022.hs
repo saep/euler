@@ -31,8 +31,8 @@ import Control.Applicative
 import Data.Char
 import Data.List
 
-solve :: IO ()
-solve = print =<< (p22 . read . ('[':) . (++"]") <$> readFile "text/names.txt")
+solve :: IO Int
+solve = fromInteger . p22 . read . ('[':) . (++"]") <$> readFile "text/names.txt"
 
 p22 :: [String] -> Integer
 p22 = sum . zipWith (*) [1..] . fmap sum .sort

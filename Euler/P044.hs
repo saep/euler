@@ -32,8 +32,8 @@ import Data.Monoid
 import Data.IntSet (IntSet, member, insert)
 import Euler.Numbers (pentagonal)
 
-solve :: IO ()
-solve = print solution
+solve :: IO Int
+solve = return solution
 
 solution :: Int
 solution = uncurry subtract $ findPair mempty [] [1..]

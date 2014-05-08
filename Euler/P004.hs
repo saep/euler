@@ -22,8 +22,8 @@ module Euler.P004
        -- ) where
        where
 
-solve :: IO ()
-solve = print (findPalindrome 0 999 999)
+solve :: IO Int
+solve = return (findPalindrome 0 999 999)
 
 -- naive = maximum $ [ i*j | i <- [999,998..100], j <- [999,998..100], isPalindrome (i*j) ]
 

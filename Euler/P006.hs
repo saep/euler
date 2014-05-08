@@ -29,5 +29,5 @@ module Euler.P006
 
 import Euler.Formulae (sumTo, squareOfSum)
 
-solve :: IO ()
-solve = print . abs $ squareOfSum 100 - sumTo 100^2
+solve :: IO Int
+solve = return . abs $ squareOfSum 100 - sumTo 100^2

@@ -26,5 +26,5 @@ module Euler.P002
 
 import Euler.Formulae
 
-solve :: IO ()
-solve = print . sum . filter even $ takeWhile (< 4000000) fibs
+solve :: IO Int
+solve = return . fromInteger . sum . filter even $ takeWhile (< 4000000) fibs

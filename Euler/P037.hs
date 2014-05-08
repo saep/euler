@@ -30,8 +30,8 @@ import Euler.Prime (isPrime)
 
 -- | Even without limiting the number of resulting primes to 11, this
 -- solution runs in less than a tenth of a second!
-solve :: IO ()
-solve = print . sum . take 11 $ filter isLeftToRightTruncateablePrime rightToLeftTruncateablePrimes
+solve :: IO Int
+solve = return . sum . take 11 $ filter isLeftToRightTruncateablePrime rightToLeftTruncateablePrimes
 
 -- | This function does not create all primes which are truncateable
 -- from right to left as it filters out the simple cases where any

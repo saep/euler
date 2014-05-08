@@ -34,8 +34,8 @@ import Data.List (sort)
 import Data.Maybe
 import Euler.Numbers (toDigits)
 
-solve :: IO ()
-solve = print . sum $ nthPowerDigits 5
+solve :: IO Int
+solve = return . sum $ nthPowerDigits 5
 
 -- | Calculate the numbers which are equal to the sum of ther digits
 -- to the nth power.

@@ -29,8 +29,8 @@ module Euler.P040
 
 import Data.Char
 
-solve :: IO ()
-solve = print . product $ fmap (d . (10^)) [0..6]
+solve :: IO Int
+solve = return . product $ fmap (d . (10^)) [0..6]
 
 d :: Integer -> Int
 d i = d' 0 (i-1) [1..]

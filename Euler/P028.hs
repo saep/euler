@@ -30,25 +30,16 @@ module Euler.P028
        ( solve
        ) where
 
-solve :: IO ()
-solve = print $ f 1001
-  where
-    f :: Int -> Int
-    -- f n = 1 + sum $ fmap (\n -> n^2 + n^2 - n + 1 + n^2 - 2*n +2 + n^2 - 3*n + 3) [3,5..n]
-    -- f n = (1+) . sum $ fmap (\n -> 4 * n^2 - 6*n + 6) [3,5..n]
-    -- f n = (1+) . sum $ fmap (\n -> 4 * (n+1)^2 - 6 * (n+1) + 6) [2,4..n-1]
-    -- f n = (1+) . sum $ fmap (\n -> 4 * (2*n+1)^2 - 6 * (2*n+1) + 6) [1..(n-1) `div` 2]
-    -- f n = (1+) . sum $ fmap (\n -> 4 * 4*n^2 + 16*n + 4 - 12 *n + 6 + 6) [1..(n-1) `div` 2]
-    -- f n = (1+) . sum $ fmap (\n -> 16*n^2 + 4*n + 16) [1..(n-1) `div` 2]
-    f n = let n' = (n-1) `div` 2
-          -- Let's make a formula from this:
-          --
-          -- in 1 + 16*(n'*(n'+1)*(2*n'+1))`div`6 + 4*(n'*(n'+1) `div` 2) + 16*n'
-          -- in 1 + 2*( 4*(n'*(n'+1)*(2*n'+1))`div`3 + n'*(n'+1) + 8*n')
-          -- in 1 + 2*( 4*(2*n'^3+3*n'^2 + n')`div`3 + n'^2 + n' + 8*n')
-          -- in 1 + 2*( (8*n'^3+15*n'^2 + 31*n')`div`3)
-          in (16*n'^3 + 30*n'^2 + 62*n' + 3) `div` 3
+-- diagonalSum (2*k+1) = 1 + Σ_(i=1)^k 1 + 4(2i+1)^2 - 12*i
+-- = 1 + Σ_(i=1)^k 16i^2 + 4i + 4
+-- = 1 + 16k(k+1)(2k+1)/6 + 4k(k+1)/2 + Σ_(k=1)^k 4
+-- = 1 + 8k(k+1)(2k+1)/3 + 2k(k+1) + 4*k
 
--- solve = print . fst
---         . foldl (\(a,l) b -> (a+l+b,l+b)) (1,1)
---         $ concatMap (replicate 4) [2,4..1000]
+solve :: IO Int
+solve = return $ diagonalSum 1001
+
+diagonalSum :: Int -> Int
+diagonalSum n = let k = (n-1) `div` 2
+                in 1 + (8*k*(k+1)*(2*k+1)) `div` 3 + 2*k*(k+1) + 4*k
+
+

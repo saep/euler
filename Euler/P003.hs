@@ -21,5 +21,5 @@ module Euler.P003
 
 import Euler.Prime
 
-solve :: IO ()
-solve = print . maximum $ factorizeSingleNumber 600851475143
+solve :: IO Int
+solve = return . maximum $ factorizeSingleNumber 600851475143

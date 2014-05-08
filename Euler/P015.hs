@@ -22,8 +22,8 @@ module Euler.P015
        ) where
 
 -- | (a+b)! /(a! * b!)
-solve :: IO ()
-solve = print (fac (20+20) `div` (fac 20 * fac 20) :: Integer)
+solve :: IO Int
+solve = return . fromInteger $ (fac (20+20) `div` (fac 20 * fac 20))
 
 fac :: Integer -> Integer
 fac n = product [1..n]

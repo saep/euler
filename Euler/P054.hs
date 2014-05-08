@@ -128,13 +128,13 @@ parseColor y = case y of
     'S' -> Spades
     _ -> error "undefined card type"
 
-solve :: IO ()
+solve :: IO Int
 solve = do
     f <- readFile "text/poker.txt"
     let rawHands = fmap (parseHands . words) $ lines f
         hands = fmap (defineHandType *** defineHandType) rawHands
         p1wins = length $ filter (uncurry (>)) hands
-    print p1wins
+    return p1wins
 
 defineHandType :: Hand -> HandType
 defineHandType h = case (sortByLength . group . sort . fmap fst . getHand) h of

@@ -26,8 +26,8 @@ import Control.Arrow ((&&&))
 import Data.List (group, sort)
 import Euler.Numbers (pythagoreanTriplets)
 
-solve :: IO ()
-solve = print . snd . maximum
+solve :: IO Int
+solve = return . snd . maximum
         . fmap (length &&& head)
         . group . sort
         . concat . takeWhile (not . null)

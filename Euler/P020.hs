@@ -24,5 +24,5 @@ module Euler.P020
 
 import Data.Char
 
-solve :: IO ()
-solve = print . sum . fmap digitToInt . show $ product [1..100]
+solve :: IO Int
+solve = return . sum . fmap digitToInt . show $ product [1..100]

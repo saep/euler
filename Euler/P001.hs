@@ -23,8 +23,8 @@ module Euler.P001
 
 import Euler.Formulae (sumTo)
 
-solve :: IO ()
-solve = print $ f 3 + f 5 - f (3*5)
+solve :: IO Int
+solve = return $ f 3 + f 5 - f (3*5)
   where
     limit = 999 :: Int
     f n = n * sumTo (limit `div` n)

@@ -26,8 +26,8 @@ module Euler.P017
        ( solve
        ) where
 
-solve :: IO ()
-solve = print $ length "one" * ((1 + 8) * 10 + 1 + 100)
+solve :: IO Int
+solve = return $ length "one" * ((1 + 8) * 10 + 1 + 100)
         --
         + ((1+8) * 10 + 100) * sum [ length "two"
                                    , length "three"

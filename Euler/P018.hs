@@ -37,8 +37,8 @@ module Euler.P018
 
 import Control.Applicative
 
-solve :: IO ()
-solve = maximumPathSum "text/P018.txt" >>= print
+solve :: IO Int
+solve = fromInteger <$> maximumPathSum "text/P018.txt"
 
 maximumPathSum :: FilePath -> IO Integer
 maximumPathSum file = do

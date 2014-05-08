@@ -27,8 +27,8 @@ module Euler.P011
 import Control.Applicative
 import Data.List
 
-solve :: IO ()
-solve = print . maxProduct =<<
+solve :: IO Int
+solve = return . maxProduct =<<
         fmap (fmap read . words) . lines <$> readFile "text/P011.txt"
 
 maxProduct :: [[Int]] -> Int

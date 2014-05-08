@@ -31,8 +31,8 @@ import Data.List (sort, group)
 
 type Coin = Int
 
-solve :: IO ()
-solve = print $ coinBinations 200 [1,2,5,10,20,50,100,200]
+solve :: IO Int
+solve = return . fromInteger  $ coinBinations 200 [1,2,5,10,20,50,100,200]
 
 -- | This problem can be solved by using dynamic programming. The
 -- general idea is to calculate the possible combinations for the

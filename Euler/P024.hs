@@ -27,8 +27,9 @@ module Euler.P024
 
 import Data.Char
 
-solve :: IO ()
-solve = putStrLn . fmap (chr . (+) (ord '0')) $ findNthPermutation 999999 [0..9]
+solve :: IO Int
+solve = return . read . fmap (chr . (+) (ord '0'))
+               $ findNthPermutation 999999 [0..9]
 
 fac :: Integral i => i -> Integer
 fac n = product [1..fromIntegral n]

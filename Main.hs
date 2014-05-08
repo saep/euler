@@ -78,12 +78,16 @@ import qualified Data.IntMap as M
 data Options = Options { problem :: Int }
 
 prettySolution :: Options -> IO ()
-prettySolution (Options { problem = i}) =
-  do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
-     maybe (print "Solution not available.") id $ M.lookup i problems
+prettySolution (Options { problem = i}) = do
+    putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
+    maybe (print "Solution not available.") (print =<<) $ M.lookup i problems
 
 optionParser :: Parser Options
-optionParser = Options <$> option (long "problem" <> short 'p' <> metavar "N" <> help "Problem number to test.")
+optionParser = Options <$> option
+        (long "problem"
+        <> short 'p'
+        <> metavar "N"
+        <> help "Problem number to test.")
 
 main :: IO ()
 main = execParser opts >>= prettySolution
@@ -93,7 +97,7 @@ main = execParser opts >>= prettySolution
      <> progDesc "Print the solution for a project euler riddle."
      <> header "euler - A project euler solution producer ;-)" )
 
-problems :: M.IntMap (IO ())
+problems :: M.IntMap (IO Int)
 problems = M.fromAscList $
        zip [1..] [ Euler.P001.solve
                  , Euler.P002.solve

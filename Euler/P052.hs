@@ -26,8 +26,8 @@ import Data.List ((\\))
 As I've read in the forum to the solutions, the digits of the fraction 1/7
 have the desired properties to solve this problem.
 -}
-solve :: IO ()
-solve = print $ head [ x | x <- [10..]
+solve :: IO Int
+solve = return $ head [ x | x <- [10..]
                      , let sx = show x
                      , head sx == '1'
                      , head (tail sx) < '7'

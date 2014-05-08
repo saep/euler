@@ -29,7 +29,7 @@ module Euler.Numbers
 import Control.Applicative
 import Data.Maybe
 import Euler.SList
-import Data.List (insert, foldl')
+import Data.List (foldl')
 import Euler.Prime
 import Control.Monad.State
 import qualified Data.IntMap as M

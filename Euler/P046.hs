@@ -34,8 +34,8 @@ module Euler.P046
 
 import Euler.Prime
 
-solve :: IO ()
-solve = print $ until (not . testProperty) (+2) 9
+solve :: IO Int
+solve = return $ until (not . testProperty) (+2) 9
 
 testProperty :: Int -> Bool
 testProperty c =

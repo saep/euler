@@ -28,8 +28,8 @@ import Euler.Prime (isPrime)
 import Euler.SList (snub)
 import Euler.Numbers
 
-solve :: IO ()
-solve = print (circularPrimes 6)
+solve :: IO Int
+solve = return (circularPrimes 6)
 
 circles :: [Int] -> [Int]
 circles ps = snub . sort $ foldl' f [num] [0..l-2]

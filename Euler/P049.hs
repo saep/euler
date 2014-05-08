@@ -30,9 +30,9 @@ import Data.List (permutations)
 import Data.IntSet (IntSet, member)
 import qualified Data.IntSet as S
 
-solve :: IO ()
+solve :: IO Int
 solve = let initialState = (S.fromList . fmap read . permutations . show) 8147
-        in print $ evalState (findNumber [9997,9995..1001]) initialState
+        in return . read $ evalState (findNumber [9997,9995..1001]) initialState
 
 findNumber :: [Int] -> State IntSet String
 findNumber ~(x:xs) = do

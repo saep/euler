@@ -27,8 +27,8 @@ module Euler.P036
 import Data.Bits
 import Euler.Numbers (toNum)
 
-solve :: IO ()
-solve = print . sum $ [ x | n <- [2,4,6], x <- base10candidates n, isBinaryPalindrome x ]
+solve :: IO Int
+solve = return . sum $ [ x | n <- [2,4,6], x <- base10candidates n, isBinaryPalindrome x ]
 
 isBinaryPalindrome :: Int -> Bool
 isBinaryPalindrome n = foldr test True [0..u`div`2]

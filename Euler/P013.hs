@@ -17,6 +17,8 @@ module Euler.P013
        ( solve
        ) where
 
+import Control.Applicative
+
 -- | The maximum amount of carry that can be created is (when starting
 -- from the right) 900. If the second column of digits is all nines as
 -- well, we get a carry of 990 for the next column and then we cann
@@ -29,6 +31,6 @@ module Euler.P013
 -- in one column. So, as the reach for the carry is only two digits
 -- and we have to add at least two digits, we only need to consider
 -- 10+3-2=11 digits of the numbers.
-solve :: IO ()
-solve = putStrLn . take 10 . show . (sum :: [Int] -> Int)
-        . fmap (read . take 11) . lines =<< readFile "text/P013.txt"
+solve :: IO Int
+solve = read . take 10 . show . sum . fmap (read . take 11) . lines
+        <$> readFile "text/P013.txt"

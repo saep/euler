@@ -39,8 +39,8 @@ type Day = Integer
 
 type Month = Integer
 
-solve :: IO ()
-solve = print $ length [ () | m <- [1..12], y <- [1901..2000], isWeekDay (y,m,1) Sunday ]
+solve :: IO Int
+solve = return $ length [ () | m <- [1..12], y <- [1901..2000], isWeekDay (y,m,1) Sunday ]
 
 isLeapYear :: Year -> Bool
 isLeapYear y = ((y `mod` 4 == 0) && (y `mod` 100 /= 0)) || (y `mod` 400 == 0)

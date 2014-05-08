@@ -40,6 +40,6 @@ module Euler.P025
 
 import Euler.Formulae
 
-solve :: IO ()
+solve :: IO Int
 solve = let threshold = 10^999
-        in print . fst . head $ dropWhile (\(_, n) -> n - threshold < 0) $ zip [0..] fibs
+        in return . fst . head $ dropWhile (\(_, n) -> n - threshold < 0) $ zip [0..] fibs
