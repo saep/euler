@@ -7,13 +7,10 @@ module Euler.Prime
        , coPrime
        , primes
        , sunion
-       , atkin
        ) where
 
-import Data.Bits
 import Data.List
 import Euler.SList
-import qualified Data.IntSet as S
 
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
@@ -84,33 +81,3 @@ wheel :: [Int]
 wheel = 2:4:2:4:6:2:6:4:2:4:6:6:2:6:4:2:6:4:6:8:4:2:4:2:
         4:8:6:4:6:2:4:6:2:6:6:4:2:4:6:2:6:4:2:4:2:10:2:10:wheel
 
-atkin :: Int -> S.IntSet
-atkin m = let bs = atkin' m
-          in S.fromAscList (2:[ x | x <- [3,5..m], testBit bs x ])
-
-atkin' :: Int -> Integer
-atkin' m =
-    let sqm = 1 + sqrt' m -- to avoid missing one edge case
-        cps = foldl' complementBit 12 $ concat
-            [ [ n | x <- [1..sqm`div`2], y <- [1..(sqm+2*x)*(sqm-2*x)]
-              , let n = 4*x*x + y*y
-                    -- 4x^2 + y^2 <= m --> y <= sqrt(m - 4x^2)
-                    -- <=> y <= (sqm + 2x)(sqm - 2x)
-              , n `mod` 12 == 1 || n `mod` 12 == 5
-              , n <= m
-              ]
-            , [ n | let sq3 = sqrt' 3
-              , x <- [1..sqm `div` sq3], y <- [1..(sqm+sq3*x)*(sqm-sq3*x)]
-              , let n = 3*x*x + y*y
-                    -- 3x^2 + y^2 <= m --> y <= sqrt(m - 3x^2)
-                    -- <=> y <= (sqm + sq3*x)(sqm - sq3*x)
-              , n `mod` 12 == 7
-              , n <= m
-              ]
-            , [ n | x <- [1..sqm], y <- [1..x-1]
-              , let n = 3*x*x - y*y
-              , n `mod` 12 == 11
-              , n <= m
-              ]
-            ]
-    in foldl' clearBit cps [ k | n <- [5..sqm], k <- [n*n,2*n*n..m] ]
