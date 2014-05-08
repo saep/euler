@@ -33,31 +33,28 @@ module Euler.P014
        ( solve
        ) where
 
-import qualified Data.IntMap as M
-import Data.Maybe
+
+import Control.Monad
+import qualified Data.Vector.Unboxed as V
+import qualified Data.Vector.Unboxed.Mutable as VM
 
 solve :: IO ()
-solve = print $ findLongestCollatz [500001,500003..999999] (1,1) (M.singleton 1 1)
-
-findLongestCollatz :: [Int] -> (Int, Int) -> M.IntMap Int -> Int
-findLongestCollatz (x:xs) curMax m
-  | x `M.member` m = findLongestCollatz xs curMax m
-  | otherwise = let (longest, len, m') = updateMap (collatz x) curMax m
-                in findLongestCollatz xs (longest, len) m'
-findLongestCollatz _ (longest, _) _ = longest
-
-updateMap :: [Int] -> (Int, Int) -> M.IntMap Int -> (Int, Int, M.IntMap Int)
-updateMap cs (longest, len) m =
-  let (xs, l:_) = span (\k -> isNothing (M.lookup k m)) cs
-      len' = length xs + fromJust (M.lookup l m)
-      toInsert = zip xs [len',(len'-1)..]
-      m' = foldr (uncurry M.insert) m toInsert
-  in case compare len len' of
-    LT -> (head xs, len', m')
-    _ -> (longest, len, m')
+solve = print $ V.maxIndex collatzVector
 
 collatz :: Int -> [Int]
 collatz n
   | n == 1 = [1]
   | odd n = n : collatz (3*n + 1)
   | otherwise = n : collatz (n `div` 2)
+
+collatzVector :: V.Vector Int
+collatzVector = V.create $ do
+    v <- VM.new 1000000
+    VM.write v 0 0
+    VM.write v 1 1
+    forM_ [2..999999] $ \i -> do
+            let (ns, old:_) = span (>= i) $ collatz i
+            lengthOld <- VM.read v old
+            VM.write v i (length ns + lengthOld)
+    return v
+
