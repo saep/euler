@@ -9,8 +9,7 @@ Stability   :  experimental
 Portability :  portable
 
 This module gives convenient access to calculate the solution for any
-exisiting and solved project euler riddle.
--}
+exisiting and solved project euler riddle.  -}
 
 module Main
        ( main
@@ -73,13 +72,29 @@ import qualified Euler.P054
 import qualified Euler.P055
 import qualified Euler.P056
 
-prettySolution :: (Int, IO ()) -> IO ()
-prettySolution (i, solution) =
+import Options.Applicative
+import qualified Data.IntMap as M
+
+data Options = Options { problem :: Int }
+
+prettySolution :: Options -> IO ()
+prettySolution (Options { problem = i}) =
   do putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
-     solution
+     maybe (print "Solution not available.") id $ M.lookup i problems
+
+optionParser :: Parser Options
+optionParser = Options <$> option (long "problem" <> short 'p' <> metavar "N" <> help "Problem number to test.")
 
 main :: IO ()
-main = mapM_ prettySolution $
+main = execParser opts >>= prettySolution
+  where
+    opts = info (helper <*> optionParser)
+      ( fullDesc
+     <> progDesc "Print the solution for a project euler riddle."
+     <> header "euler - A project euler solution producer ;-)" )
+
+problems :: M.IntMap (IO ())
+problems = M.fromAscList $
        zip [1..] [ Euler.P001.solve
                  , Euler.P002.solve
                  , Euler.P003.solve
