@@ -36,8 +36,8 @@ module Euler.P023
        ) where
 
 import Control.Monad
-import Euler.SList
-import Euler.Prime
+import Euler.SList (sunion, sremoveAll)
+import Euler.Prime (primes, sumOfProperDivisors)
 import qualified Data.Vector.Unboxed as VU
 import qualified Data.Vector.Unboxed.Mutable as VMU
 
@@ -46,9 +46,10 @@ limit = 28123
 
 isAbundant :: Int -> Bool
 isAbundant n = sumOfProperDivisors n > n
+
 {-
 Since 18 and 12 are abundant numbers, we can conclude that any number greater
-than 18, which is evenly divisable by 6 is the composite of two abundant
+than 18 which is evenly divisable by 6 is the composite of two abundant
 numbers. This leaves the numbers to check, which have a remainder of [1..5]. As
 20 is the next abundant number, any number with a modulo 6 remainder of 2 ≥ 32
 is also the sum of two abundant numbers. As 2*20 will yield a modulo 6 remainder
@@ -84,3 +85,4 @@ abundantNumbersVector = VU.create $ do
         when (not a && isAbundant i) $ VMU.write v i True
 
     return v
+
