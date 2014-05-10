@@ -53,7 +53,7 @@ executable euler
 
   -- Other library packages from which modules are imported.
   build-depends:       base ==4.6.*, mtl ==2.1.*, containers ==0.5.*,
-                       vector ==0.10.*, optparse-applicative ==0.7.*,
+                       vector ==0.10.*, optparse-applicative ==0.8.*,
                        primitive ==0.5.*
 
   ghc-options:         -O2
