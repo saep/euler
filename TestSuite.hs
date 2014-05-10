@@ -57,13 +57,16 @@ import qualified Euler.P054
 import qualified Euler.P055
 import qualified Euler.P056
 
+import qualified Euler.PrimeTest
+
 import Test.HUnit
 import Test.Framework hiding (Test)
 import Test.Framework.Providers.HUnit
 
 main :: IO ()
 main = Test.Framework.defaultMain
-    [ testGroup "Hunit Tests" (hUnitTestToTests (test tests))
+    [ testGroup "Problem result tests" (hUnitTestToTests (test tests))
+    , testGroup "Prime module tests" (hUnitTestToTests Euler.PrimeTest.tests)
     ]
 
 tests :: [Test]

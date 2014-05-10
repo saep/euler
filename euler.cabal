@@ -53,7 +53,8 @@ executable euler
 
   -- Other library packages from which modules are imported.
   build-depends:       base ==4.6.*, mtl ==2.1.*, containers ==0.5.*,
-                       vector ==0.10.*, optparse-applicative ==0.8.*
+                       vector ==0.10.*, optparse-applicative ==0.7.*,
+                       primitive ==0.5.*
 
   ghc-options:         -O2
 
@@ -65,6 +66,6 @@ test-suite all-tests
   build-depends:       base ==4.6.*, mtl ==2.1.*, containers ==0.5.*,
                        vector ==0.10.*, QuickCheck ==2.6.*, HUnit ==1.2.*,
                        test-framework ==0.8.*, test-framework-hunit ==0.3.*,
-                       test-framework-quickcheck2 ==0.3.*
+                       test-framework-quickcheck2 ==0.3.*, primitive ==0.5.*
 
   cpp-options:         -DHTEST
