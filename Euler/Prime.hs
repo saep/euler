@@ -16,15 +16,15 @@ module Euler.Prime
        , isPrimeS
        ) where
 
-import Control.Monad
-import Data.List
-import Data.Ratio
-import Euler.SList
+import           Control.Monad
+import           Data.List
+import           Data.Ratio
+import           Euler.SList
 
-import qualified Data.Vector.Unboxed as V
+import qualified Data.Vector.Unboxed         as V
 import qualified Data.Vector.Unboxed.Mutable as VM
 
-import Control.Monad.Primitive
+import           Control.Monad.Primitive
 
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n

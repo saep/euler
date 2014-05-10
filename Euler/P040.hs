@@ -27,7 +27,7 @@ module Euler.P040
        ( solve
        ) where
 
-import Data.Char
+import           Data.Char
 
 solve :: IO Int
 solve = return . product $ fmap (d . (10^)) [0..6]

@@ -59,9 +59,9 @@ import qualified Euler.P056
 
 import qualified Euler.PrimeTest
 
-import Test.HUnit
-import Test.Framework hiding (Test)
-import Test.Framework.Providers.HUnit
+import           Test.Framework                 hiding (Test)
+import           Test.Framework.Providers.HUnit
+import           Test.HUnit
 
 main :: IO ()
 main = Test.Framework.defaultMain

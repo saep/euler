@@ -34,8 +34,8 @@ module Euler.P014
        ) where
 
 
-import Control.Monad
-import qualified Data.Vector.Unboxed as V
+import           Control.Monad
+import qualified Data.Vector.Unboxed         as V
 import qualified Data.Vector.Unboxed.Mutable as VM
 
 solve :: IO Int

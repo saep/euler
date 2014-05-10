@@ -20,8 +20,8 @@ module Euler.P008
        ( solve
        ) where
 
-import Control.Applicative
-import Data.Char
+import           Control.Applicative
+import           Data.Char
 
 solve :: IO Int
 solve = filter isDigit <$> readFile "text/P008.txt" >>=

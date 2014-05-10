@@ -19,7 +19,7 @@ module Euler.P010
        ( solve
        ) where
 
-import Euler.Prime (primes)
+import           Euler.Prime (primes)
 
 solve :: IO Int
 solve = return . sum . fmap (fromIntegral :: Int -> Int)

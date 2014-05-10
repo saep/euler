@@ -38,7 +38,7 @@ module Euler.P025
        ( solve
        ) where
 
-import Euler.Formulae
+import           Euler.Formulae
 
 solve :: IO Int
 solve = let threshold = 10^999

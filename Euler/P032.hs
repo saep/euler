@@ -28,9 +28,9 @@ module Euler.P032
        ( solve
        ) where
 
-import Data.Bits
-import Data.List (nub, sort, (\\), group)
-import Euler.Numbers (toDigits, toNum)
+import           Data.Bits
+import           Data.List     (group, nub, sort, (\\))
+import           Euler.Numbers (toDigits, toNum)
 
 solve :: IO Int
 solve = return . sum . fmap head . group . sort $ pandigitalProducts 9

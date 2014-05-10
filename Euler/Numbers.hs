@@ -26,13 +26,13 @@ module Euler.Numbers
        , module Control.Monad.State
        ) where
 
-import Control.Applicative
-import Data.Maybe
-import Euler.SList
-import Data.List (foldl')
-import Euler.Prime
-import Control.Monad.State
-import qualified Data.IntMap as M
+import           Control.Applicative
+import           Control.Monad.State
+import qualified Data.IntMap         as M
+import           Data.List           (foldl')
+import           Data.Maybe
+import           Euler.Prime
+import           Euler.SList
 
 -- | Simply an IntMap containing a list of Ints.
 type DivisorMap = M.IntMap [Int]

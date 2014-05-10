@@ -32,7 +32,7 @@ module Euler.P046
        ( solve
        ) where
 
-import Euler.Prime
+import           Euler.Prime
 
 solve :: IO Int
 solve = return $ until (not . testProperty) (+2) 9

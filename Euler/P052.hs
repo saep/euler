@@ -20,7 +20,7 @@ module Euler.P052
        ( solve
        ) where
 
-import Data.List ((\\))
+import           Data.List ((\\))
 
 {-
 As I've read in the forum to the solutions, the digits of the fraction 1/7

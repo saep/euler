@@ -23,10 +23,10 @@ module Euler.P035
        ( solve
        ) where
 
-import Data.List (foldl', sort)
-import Euler.Prime (isPrime)
-import Euler.SList (snub)
-import Euler.Numbers
+import           Data.List     (foldl', sort)
+import           Euler.Numbers
+import           Euler.Prime   (isPrime)
+import           Euler.SList   (snub)
 
 solve :: IO Int
 solve = return (circularPrimes 6)

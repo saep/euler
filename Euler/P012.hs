@@ -38,11 +38,11 @@ module Euler.P012
        ( solve
        ) where
 
-import Data.List
-import Euler.Formulae (triangularNumber)
-import Euler.Prime
-import qualified Data.Map as M
-import Control.Monad.State
+import           Control.Monad.State
+import           Data.List
+import qualified Data.Map            as M
+import           Euler.Formulae      (triangularNumber)
+import           Euler.Prime
 
 solve :: IO Int
 solve = return $ evalState (p12 1 [2..]) M.empty

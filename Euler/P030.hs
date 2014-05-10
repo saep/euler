@@ -29,10 +29,10 @@ module Euler.P030
        ( solve
        ) where
 
-import Control.Monad
-import Data.List (sort)
-import Data.Maybe
-import Euler.Numbers (toDigits)
+import           Control.Monad
+import           Data.List     (sort)
+import           Data.Maybe
+import           Euler.Numbers (toDigits)
 
 solve :: IO Int
 solve = return . sum $ nthPowerDigits 5

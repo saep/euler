@@ -27,10 +27,10 @@ module Euler.P044
        ( solve
        ) where
 
-import Data.Maybe
-import Data.Monoid
-import Data.IntSet (IntSet, member, insert)
-import Euler.Numbers (pentagonal)
+import           Data.IntSet   (IntSet, insert, member)
+import           Data.Maybe
+import           Data.Monoid
+import           Euler.Numbers (pentagonal)
 
 solve :: IO Int
 solve = return solution

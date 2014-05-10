@@ -72,8 +72,8 @@ import qualified Euler.P054
 import qualified Euler.P055
 import qualified Euler.P056
 
-import Options.Applicative
-import qualified Data.IntMap as M
+import qualified Data.IntMap         as M
+import           Options.Applicative
 
 data Options = Options { problem :: Int }
 

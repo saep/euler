@@ -23,7 +23,7 @@ module Euler.P009
        ( solve
        ) where
 
-import Euler.Numbers (pythagoreanTriplets)
+import           Euler.Numbers (pythagoreanTriplets)
 
 solve :: IO Int
 solve = return . (\(a,b,c) -> a*b*c) . head

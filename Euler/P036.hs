@@ -24,8 +24,8 @@ module Euler.P036
        ( solve
        ) where
 
-import Data.Bits
-import Euler.Numbers (toNum)
+import           Data.Bits
+import           Euler.Numbers (toNum)
 
 solve :: IO Int
 solve = return . sum $ [ x | n <- [2,4,6], x <- base10candidates n, isBinaryPalindrome x ]

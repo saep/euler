@@ -1,7 +1,7 @@
 module Euler.Formulae where
 
-import Data.Bits
-import Data.List
+import           Data.Bits
+import           Data.List
 
 -- | > sum [1..n]
 sumTo :: Integral n => n -> n

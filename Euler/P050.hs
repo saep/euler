@@ -26,7 +26,7 @@ module Euler.P050
        ( solve
        ) where
 
-import Euler.Prime (isPrime)
+import           Euler.Prime (isPrime)
 
 solve :: IO Int
 solve = return $ snd findLongestConsecutivePrime

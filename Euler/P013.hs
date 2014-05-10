@@ -17,7 +17,7 @@ module Euler.P013
        ( solve
        ) where
 
-import Control.Applicative
+import           Control.Applicative
 
 -- | The maximum amount of carry that can be created is (when starting
 -- from the right) 900. If the second column of digits is all nines as

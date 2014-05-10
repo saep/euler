@@ -35,7 +35,7 @@ module Euler.P018
        , maximumPathSum
        ) where
 
-import Control.Applicative
+import           Control.Applicative
 
 solve :: IO Int
 solve = fromInteger <$> maximumPathSum "text/P018.txt"

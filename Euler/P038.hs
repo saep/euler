@@ -33,7 +33,7 @@ module Euler.P038
        ( solve
        ) where
 
-import Data.List (delete)
+import           Data.List (delete)
 
 solve :: IO Int
 solve = return maxPandigital

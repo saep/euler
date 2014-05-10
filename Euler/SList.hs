@@ -21,7 +21,7 @@ module Euler.SList
        , module Data.List
        ) where
 
-import Data.List (insert, sort)
+import           Data.List (insert, sort)
 
 sremoveAll :: Ord a => [a] -> [a] -> [a]
 sremoveAll (x:xs) (y:ys) = case compare x y of

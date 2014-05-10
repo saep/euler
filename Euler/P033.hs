@@ -29,7 +29,7 @@ module Euler.P033
        ( solve
        ) where
 
-import Data.Ratio
+import           Data.Ratio
 
 solve :: IO Int
 solve = (return . denominator . product)

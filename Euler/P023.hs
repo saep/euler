@@ -35,11 +35,11 @@ module Euler.P023
        ( solve
        ) where
 
-import Control.Monad
-import Euler.SList (sunion, sremoveAll)
-import Euler.Prime (primes, sumOfProperDivisors)
-import qualified Data.Vector.Unboxed as VU
+import           Control.Monad
+import qualified Data.Vector.Unboxed         as VU
 import qualified Data.Vector.Unboxed.Mutable as VMU
+import           Euler.Prime                 (primes, sumOfProperDivisors)
+import           Euler.SList                 (sremoveAll, sunion)
 
 limit :: Int
 limit = 28123

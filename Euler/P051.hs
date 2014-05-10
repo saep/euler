@@ -27,11 +27,11 @@ module Euler.P051
        ( solve
        ) where
 
-import Control.Monad
-import Data.Char (digitToInt)
-import Data.List (foldl')
-import Data.Maybe
-import Euler.Prime (isPrime)
+import           Control.Monad
+import           Data.Char     (digitToInt)
+import           Data.List     (foldl')
+import           Data.Maybe
+import           Euler.Prime   (isPrime)
 
 type PatternNumber = String
 

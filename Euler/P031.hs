@@ -27,7 +27,7 @@ module Euler.P031
        ( solve
        ) where
 
-import Data.List (sort, group)
+import           Data.List (group, sort)
 
 type Coin = Int
 

@@ -13,10 +13,10 @@ module Euler.PrimeTest
        ( tests
        ) where
 
-import Euler.Prime
 import qualified Data.Vector.Unboxed as V
+import           Euler.Prime
 
-import Test.HUnit
+import           Test.HUnit
 
 tests :: Test
 tests = TestList [TestLabel "Atkin test " testAtkin]

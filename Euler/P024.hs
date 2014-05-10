@@ -25,7 +25,7 @@ module Euler.P024
        ( solve
        ) where
 
-import Data.Char
+import           Data.Char
 
 solve :: IO Int
 solve = return . read . fmap (chr . (+) (ord '0'))

@@ -19,7 +19,7 @@ module Euler.P003
        ( solve
        ) where
 
-import Euler.Prime
+import           Euler.Prime
 
 solve :: IO Int
 solve = return . maximum $ factorizeSingleNumber 600851475143

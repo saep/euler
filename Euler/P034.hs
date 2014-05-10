@@ -22,10 +22,10 @@ module Euler.P034
        ( solve
        ) where
 
-import Data.List (sortBy)
-import Euler.Numbers (toDigits)
-import Data.Vector (Vector, (!))
-import qualified Data.Vector as V
+import           Data.List     (sortBy)
+import           Data.Vector   (Vector, (!))
+import qualified Data.Vector   as V
+import           Euler.Numbers (toDigits)
 
 fd :: Vector Int
 fd = V.fromList $ fmap (\n -> product [1..n]) [0..9]

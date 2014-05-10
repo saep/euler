@@ -30,8 +30,8 @@ module Euler.P042
        ( solve
        ) where
 
-import Control.Applicative
-import Data.Char
+import           Control.Applicative
+import           Data.Char
 
 solve :: IO Int
 solve = do

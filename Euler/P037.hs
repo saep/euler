@@ -25,8 +25,8 @@ module Euler.P037
        ( solve
        ) where
 
-import Control.Applicative
-import Euler.Prime (isPrime)
+import           Control.Applicative
+import           Euler.Prime         (isPrime)
 
 -- | Even without limiting the number of resulting primes to 11, this
 -- solution runs in less than a tenth of a second!

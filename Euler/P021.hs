@@ -26,7 +26,7 @@ module Euler.P021
        ( solve
        ) where
 
-import Euler.Numbers
+import           Euler.Numbers
 
 solve :: IO Int
 solve = let limit = 9999

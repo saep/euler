@@ -80,11 +80,11 @@ module Euler.P054
        ( solve
        ) where
 
-import Control.Arrow ((***))
-import Data.Function (on)
-import Data.List (group, sort, sortBy)
-import Data.Maybe
-import qualified Data.Map as M
+import           Control.Arrow ((***))
+import           Data.Function (on)
+import           Data.List     (group, sort, sortBy)
+import qualified Data.Map      as M
+import           Data.Maybe
 
 data CardType = Two | Three | Four | Five | Six | Seven | Eight
               | Nine | Ten | Jack | Queen | King | Ace

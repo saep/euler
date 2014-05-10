@@ -28,14 +28,14 @@ module Euler.P047
        ( solve
        ) where
 
-import Control.Applicative
-import Control.Monad.State
-import Data.Monoid
-import Euler.Prime (sqrt')
-import Data.IntMap (IntMap)
-import qualified Data.IntMap as M
-import Data.IntSet (IntSet)
-import qualified Data.IntSet as S
+import           Control.Applicative
+import           Control.Monad.State
+import           Data.IntMap         (IntMap)
+import qualified Data.IntMap         as M
+import           Data.IntSet         (IntSet)
+import qualified Data.IntSet         as S
+import           Data.Monoid
+import           Euler.Prime         (sqrt')
 
 solve :: IO Int
 solve = return . evalState (find [] 2) $ M.singleton 1 mempty

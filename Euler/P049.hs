@@ -24,11 +24,11 @@ module Euler.P049
        ( solve
        ) where
 
-import Control.Monad.State
-import Euler.Prime (isPrime)
-import Data.List (permutations)
-import Data.IntSet (IntSet, member)
-import qualified Data.IntSet as S
+import           Control.Monad.State
+import           Data.IntSet         (IntSet, member)
+import qualified Data.IntSet         as S
+import           Data.List           (permutations)
+import           Euler.Prime         (isPrime)
 
 solve :: IO Int
 solve = let initialState = (S.fromList . fmap read . permutations . show) 8147

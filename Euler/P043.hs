@@ -32,8 +32,8 @@ module Euler.P043
        ( solve
        ) where
 
-import Data.Char
-import Data.List ((\\), delete, foldl')
+import           Data.Char
+import           Data.List (delete, foldl', (\\))
 
 type RemainingCharSet = String
 

@@ -22,9 +22,9 @@ module Euler.P039
        ( solve
        ) where
 
-import Control.Arrow ((&&&))
-import Data.List (group, sort)
-import Euler.Numbers (pythagoreanTriplets)
+import           Control.Arrow ((&&&))
+import           Data.List     (group, sort)
+import           Euler.Numbers (pythagoreanTriplets)
 
 solve :: IO Int
 solve = return . snd . maximum

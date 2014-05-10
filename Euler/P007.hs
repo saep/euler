@@ -20,7 +20,7 @@ module Euler.P007
        ( solve
        ) where
 
-import Euler.Prime (primes)
+import           Euler.Prime (primes)
 
 solve :: IO Int
 solve = return $ primes !! 10000 -- Index starting at 0!

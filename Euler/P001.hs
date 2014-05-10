@@ -21,7 +21,7 @@ module Euler.P001
        ( solve
        ) where
 
-import Euler.Formulae (sumTo)
+import           Euler.Formulae (sumTo)
 
 solve :: IO Int
 solve = return $ f 3 + f 5 - f (3*5)

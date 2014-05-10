@@ -30,7 +30,7 @@ module Euler.P029
        ( solve
        ) where
 
-import Data.Bits
+import           Data.Bits
 import qualified Data.IntSet as S
 
 type BitSet = Integer

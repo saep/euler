@@ -37,7 +37,7 @@ module Euler.P026
        ) where
 
 import qualified Data.IntMap as M
-import Data.List (maximumBy)
+import           Data.List   (maximumBy)
 
 solve :: IO Int
 solve = return . snd . maximumBy (\(x,_) (y,_) -> compare x y) $

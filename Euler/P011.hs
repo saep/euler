@@ -24,8 +24,8 @@ module Euler.P011
        ( solve
        ) where
 
-import Control.Applicative
-import Data.List
+import           Control.Applicative
+import           Data.List
 
 solve :: IO Int
 solve = return . maxProduct =<<

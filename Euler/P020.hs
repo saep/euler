@@ -22,7 +22,7 @@ module Euler.P020
        ( solve
        ) where
 
-import Data.Char
+import           Data.Char
 
 solve :: IO Int
 solve = return . sum . fmap digitToInt . show $ product [1..100]

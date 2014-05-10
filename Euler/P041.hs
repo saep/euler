@@ -21,8 +21,8 @@ module Euler.P041
        ( solve
        ) where
 
-import Data.List (delete, (\\))
-import Euler.Prime
+import           Data.List   (delete, (\\))
+import           Euler.Prime
 
 -- 5,6,8 and 9-pandigital numbers are always divisable by 3, so we can exclude
 -- them we can also exclude 1 to 3-pandigital numbers as the example is greater
