@@ -56,6 +56,7 @@ import qualified Euler.P053
 import qualified Euler.P054
 import qualified Euler.P055
 import qualified Euler.P056
+import qualified Euler.P057
 
 import qualified Euler.PrimeTest
 
@@ -127,5 +128,6 @@ tests =
   , "Problem 54" ~: Euler.P054.solve >>= assertEqual "54" 376
   , "Problem 55" ~: Euler.P055.solve >>= assertEqual "55" 249
   , "Problem 56" ~: Euler.P056.solve >>= assertEqual "56" 972
+  , "Problem 57" ~: Euler.P057.solve >>= assertEqual "57" 153
   ]
 
