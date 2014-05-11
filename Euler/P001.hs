@@ -23,7 +23,7 @@ module Euler.P001
 
 import           Euler.Formulae (sumTo)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ f 3 + f 5 - f (3*5)
   where
     limit = 999 :: Int

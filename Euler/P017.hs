@@ -26,7 +26,7 @@ module Euler.P017
        ( solve
        ) where
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ length "one" * ((1 + 8) * 10 + 1 + 100)
         --
         + ((1+8) * 10 + 100) * sum [ length "two"

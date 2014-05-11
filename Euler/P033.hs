@@ -31,7 +31,7 @@ module Euler.P033
 
 import           Data.Ratio
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = (return . denominator . product)
         [ i%k
         | i <- [1..9]

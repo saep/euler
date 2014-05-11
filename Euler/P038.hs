@@ -35,7 +35,7 @@ module Euler.P038
 
 import           Data.List (delete)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return maxPandigital
 
 -- | The first number must be a 9, because the example on the webpage

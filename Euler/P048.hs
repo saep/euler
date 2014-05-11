@@ -18,7 +18,7 @@ module Euler.P048
        ( solve
        ) where
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . fromInteger . (`mod` 10000000000) . sum
                . fmap truncateSelfpower $ [1..1000]
 

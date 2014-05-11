@@ -53,5 +53,5 @@ next cs d = [ (y:x', y `delete` s) | (x', s) <- cs
             , (digitToInt y * 100 + x) `mod` d == 0
             ]
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ sum generate

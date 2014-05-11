@@ -35,7 +35,7 @@ import           Euler.Prime   (isPrime)
 
 type PatternNumber = String
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return problem51
 
 {- Observations

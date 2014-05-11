@@ -29,7 +29,7 @@ module Euler.P040
 
 import           Data.Char
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . product $ fmap (d . (10^)) [0..6]
 
 d :: Integer -> Int

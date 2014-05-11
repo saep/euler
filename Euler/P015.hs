@@ -22,7 +22,7 @@ module Euler.P015
        ) where
 
 -- | (a+b)! /(a! * b!)
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . fromInteger $ (fac (20+20) `div` (fac 20 * fac 20))
 
 fac :: Integer -> Integer

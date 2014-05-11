@@ -43,7 +43,7 @@ module Euler.P055
        ( solve
        ) where
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ length [ () | x <- [6..9999], (not . isLychrel) x ]
 
 

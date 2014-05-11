@@ -38,7 +38,7 @@ import           Control.Monad
 import qualified Data.Vector.Unboxed         as V
 import qualified Data.Vector.Unboxed.Mutable as VM
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ V.maxIndex collatzVector
 
 collatz :: Int -> [Int]

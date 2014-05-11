@@ -27,7 +27,7 @@ module Euler.P024
 
 import           Data.Char
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . read . fmap (chr . (+) (ord '0'))
                $ findNthPermutation 999999 [0..9]
 

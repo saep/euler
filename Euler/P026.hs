@@ -39,7 +39,7 @@ module Euler.P026
 import qualified Data.IntMap as M
 import           Data.List   (maximumBy)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . snd . maximumBy (\(x,_) (y,_) -> compare x y) $
         fmap (\x -> (reciprocalCycleLength x, x)) [999,998..1]
 

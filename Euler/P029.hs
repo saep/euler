@@ -35,7 +35,7 @@ import qualified Data.IntSet as S
 
 type BitSet = Integer
 
-solve :: IO Int
+solve :: Monad m => m Int
 -- This one works fast, but it is quadratic and this problem can be solved more elegantly.
 -- solve = return . length . snub $ sort [ a^b | a <- [2..100], b <- [2..100] ]
 solve = return $ distinctPowers 100 100

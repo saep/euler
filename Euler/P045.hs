@@ -27,7 +27,7 @@ module Euler.P045
 
 -- Since every hexagonal number is also a triangular number, it suffices to
 -- search for a pentagonal number that is also a hexagonal number.
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . head . dropWhile (<= 40755)
         $ keepSame (scanl1 (+) [1,4..]) (scanl1 (+) [1,5..])
 

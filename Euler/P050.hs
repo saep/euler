@@ -28,7 +28,7 @@ module Euler.P050
 
 import           Euler.Prime (isPrime)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ snd findLongestConsecutivePrime
 
 primeStream :: [Int]

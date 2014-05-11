@@ -34,7 +34,7 @@ module Euler.P046
 
 import           Euler.Prime
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ until (not . testProperty) (+2) 9
 
 testProperty :: Int -> Bool

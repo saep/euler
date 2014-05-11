@@ -56,7 +56,7 @@ import           Euler.Prime         hiding (isPrime)
 --
 -- Since all primes are greater than 1, the following property must
 -- hold as well: 1 + a + b > 1 <=> a > -b
-solve :: IO Int
+solve :: Monad m => m Int
 solve = let bs = takeWhile (< 1000) primes
             coefficients = [ (a,b) | b <- tail bs, a <- [-b+2,-b+4..999] ] ++ [ (a,2) | a <- [-4,-6..998] ]
             generatedPrimes = evalState (generatePrimes coefficients) (0, primes)

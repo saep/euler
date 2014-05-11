@@ -28,7 +28,7 @@ import           Euler.Numbers
 import           Euler.Prime   (isPrime)
 import           Euler.SList   (snub)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return (circularPrimes 6)
 
 circles :: [Int] -> [Int]

@@ -37,7 +37,7 @@ import qualified Data.IntSet         as S
 import           Data.Monoid
 import           Euler.Prime         (sqrt')
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . evalState (find [] 2) $ M.singleton 1 mempty
 
 find :: [Int] -> Int -> State (IntMap IntSet) Int

@@ -27,7 +27,7 @@ module Euler.P036
 import           Data.Bits
 import           Euler.Numbers (toNum)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . sum $ [ x | n <- [2,4,6], x <- base10candidates n, isBinaryPalindrome x ]
 
 isBinaryPalindrome :: Int -> Bool

@@ -28,6 +28,6 @@ module Euler.P021
 
 import           Euler.Numbers
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = let limit = 9999
         in return . sum $ evalState (amicableNumbersTo limit) (initialWithDivisorsState limit)

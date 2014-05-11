@@ -22,5 +22,5 @@ module Euler.P007
 
 import           Euler.Prime (primes)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ primes !! 10000 -- Index starting at 0!

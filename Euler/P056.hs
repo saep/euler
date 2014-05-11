@@ -23,7 +23,7 @@ module Euler.P056
 
 import           Data.Char
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ maximum [ digitSum (a^b) | a <- [1..99] , b <- [1..99] ]
 
 digitSum :: Integer -> Int

@@ -24,5 +24,5 @@ module Euler.P020
 
 import           Data.Char
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . sum . fmap digitToInt . show $ product [1..100]

@@ -26,7 +26,7 @@ import           Control.Arrow ((&&&))
 import           Data.List     (group, sort)
 import           Euler.Numbers (pythagoreanTriplets)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . snd . maximum
         . fmap (length &&& head)
         . group . sort

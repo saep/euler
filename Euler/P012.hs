@@ -44,7 +44,7 @@ import qualified Data.Map            as M
 import           Euler.Formulae      (triangularNumber)
 import           Euler.Prime
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ evalState (p12 1 [2..]) M.empty
 
 p12 :: Int -> [Int] -> State (M.Map Int [Int]) Int

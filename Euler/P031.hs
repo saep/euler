@@ -31,7 +31,7 @@ import           Data.List (group, sort)
 
 type Coin = Int
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . fromInteger  $ coinBinations 200 [1,2,5,10,20,50,100,200]
 
 -- | This problem can be solved by using dynamic programming. The

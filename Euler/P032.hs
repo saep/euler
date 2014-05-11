@@ -32,7 +32,7 @@ import           Data.Bits
 import           Data.List     (group, nub, sort, (\\))
 import           Euler.Numbers (toDigits, toNum)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . sum . fmap head . group . sort $ pandigitalProducts 9
 
 pandigitalProducts :: Int -> [Int]

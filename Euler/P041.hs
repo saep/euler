@@ -27,7 +27,7 @@ import           Euler.Prime
 -- 5,6,8 and 9-pandigital numbers are always divisable by 3, so we can exclude
 -- them we can also exclude 1 to 3-pandigital numbers as the example is greater
 -- than that.
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ head [ p | n <- "74", p <- pandigitalCandidates n ]
 
 pandigitalCandidates :: Char -> [Int]

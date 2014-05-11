@@ -39,7 +39,7 @@ type Day = Integer
 
 type Month = Integer
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return $ length [ () | m <- [1..12], y <- [1901..2000], isWeekDay (y,m,1) Sunday ]
 
 isLeapYear :: Year -> Bool

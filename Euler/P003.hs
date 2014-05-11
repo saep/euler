@@ -21,5 +21,5 @@ module Euler.P003
 
 import           Euler.Prime
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . maximum $ factorizeSingleNumber 600851475143

@@ -30,7 +30,7 @@ import           Euler.Numbers (toDigits)
 fd :: Vector Int
 fd = V.fromList $ fmap (\n -> product [1..n]) [0..9]
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = let cs = takeWhile (not . null) $ fmap digitFactorialCandidates [2..]
             fds = filter isFactorialDigitSum $ concat cs
         in return . sum $ fmap (sum . fmap fac) fds

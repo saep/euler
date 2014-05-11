@@ -32,7 +32,7 @@ import           Data.Maybe
 import           Data.Monoid
 import           Euler.Numbers (pentagonal)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return solution
 
 solution :: Int

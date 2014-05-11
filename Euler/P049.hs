@@ -30,7 +30,7 @@ import qualified Data.IntSet         as S
 import           Data.List           (permutations)
 import           Euler.Prime         (isPrime)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = let initialState = (S.fromList . fmap read . permutations . show) 8147
         in return . read $ evalState (findNumber [9997,9995..1001]) initialState
 

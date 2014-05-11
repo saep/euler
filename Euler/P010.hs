@@ -21,6 +21,6 @@ module Euler.P010
 
 import           Euler.Prime (primes)
 
-solve :: IO Int
+solve :: Monad m => m Int
 solve = return . sum . fmap (fromIntegral :: Int -> Int)
         $ takeWhile (< 2000000) primes
