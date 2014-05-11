@@ -41,12 +41,11 @@ solve = return . length .
             filter numeratorDigitsExceedDenominatorDigits . take 1000
             $ iterate nextExpansion (3%2)
 
-nextExpansion :: Integral a => Ratio a -> Ratio a
+nextExpansion :: Ratio Integer -> Ratio Integer
 nextExpansion e = 1 + 1 / (1 + e)
 
-numeratorDigitsExceedDenominatorDigits :: (Integral a, Show a) => Ratio a
-                                       -> Bool
+numeratorDigitsExceedDenominatorDigits :: Ratio Integer -> Bool
 numeratorDigitsExceedDenominatorDigits r =
     let n = numerator r
         d = denominator r
-    in n > d && (length . show) n > (length . show) d
+    in (length . show) n > (length . show) d
