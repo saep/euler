@@ -19,12 +19,14 @@ import           Euler.Prime
 import           Test.HUnit
 
 tests :: Test
-tests = TestList [TestLabel "Atkin test " testAtkin]
+tests = TestList [ TestLabel "Atkin test " testAtkin
+                 ]
 
 testAtkin :: Test
 testAtkin =
     let a = atkin 28123
         isPrimeA n = a V.! n
-    in TestCase (do
+    in TestCase $
         mapM_ (\(x,b) -> assertBool ("prime test failed for : " ++ show x) b)
-                        [ (x,(isPrimeA x == isPrime x)) | x <- [1..28123] ])
+            [ (x,isPrimeA x == isPrime x) | x <- [1..28123] ]
+
