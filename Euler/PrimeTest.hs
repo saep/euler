@@ -20,6 +20,7 @@ import           Test.HUnit
 
 tests :: Test
 tests = TestList [ TestLabel "Atkin test " testAtkin
+                 , TestLabel "Miller rabin primality test " testMillerRabin
                  ]
 
 testAtkin :: Test
@@ -30,3 +31,7 @@ testAtkin =
         mapM_ (\(x,b) -> assertBool ("prime test failed for : " ++ show x) b)
             [ (x,isPrimeA x == isPrime x) | x <- [1..28123] ]
 
+testMillerRabin :: Test
+testMillerRabin = TestCase $
+    mapM_ (\(x,b) -> assertBool ("prime test failed for: " ++ show x) b)
+        [ (x,isPrimeMillerRabin x == isPrime x) | x <- [1..28123] ]

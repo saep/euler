@@ -14,6 +14,7 @@ module Euler.Prime
        , PrimeSieve()
        , atkin
        , isPrimeS
+       , isPrimeMillerRabin
        ) where
 
 import           Control.Monad
@@ -23,12 +24,20 @@ import           Euler.SList
 
 import qualified Data.Vector.Unboxed         as V
 import qualified Data.Vector.Unboxed.Mutable as VM
+import qualified Data.IntMap as M
 
 import           Control.Monad.Primitive
 
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
 sqrt' = floor . (sqrt :: Double -> Double) . fromIntegral
+
+-- | Take the logarithm from the given integral for base b value and round it
+-- down.
+log' :: (Integral b, Integral n) => b -> n -> n
+log' b = floor . logBase base . fromIntegral
+    where
+        base = fromIntegral b :: Double
 
 isPrime :: Int -> Bool
 isPrime n = n /= 1 && foldr test True [2..sqrt' n]
@@ -166,3 +175,42 @@ eliminateComposites v limit n = do
     pn <- VM.unsafeRead v n
     when pn $ forM_ [n*n,2*n*n..limit] $ \i -> VM.unsafeWrite v i False
 
+isPrimeMillerRabin :: Int -> Bool
+isPrimeMillerRabin n
+    | n < 4 = n == 2 || n == 3
+    | otherwise = let ws = maybe (requiredValues n) snd $ M.lookupGT n witnesses
+                      fp = find2sd (toInteger n-1)
+                  in not $ (testMillerRabin (toInteger n) ws) fp
+
+-- | Find @s@ and @d@, so that d*2^s = m
+find2sd :: Integral a => a -> (a,a)
+find2sd = f 0
+    where
+        f s d
+            | r == 1 = (s,d)
+            | otherwise = f (s+1) q
+                where
+                    (q,r) = d `divMod` 2
+
+testMillerRabin :: Integer -> [Integer] -> (Integer, Integer) -> Bool
+testMillerRabin n ws (s,d) = foldr test False ws
+    where
+        test a b = (a^d) `mod` n /= 1
+                    && all (\r -> (a^(d * (2^r))) `mod` n /= n-1) [0..s-1]
+                    || b
+
+requiredValues :: Int -> [Integer]
+requiredValues n =
+    let ub = min (toInteger n-1) $ floor (2 * ((log . fromIntegral) n)**2)
+    in [2..ub]
+
+witnesses :: M.IntMap [Integer]
+witnesses = M.fromList $
+    [(1373653, [2,3])
+    ,(9080191, [31,73])
+    ,(4759123141, [2,7,61])
+    ,(1122004669633, [2,13,23,1662803])
+    ,(2152302898747, [2,3,5,7,11])
+    ,(3474749660383,[2,3,5,7,11,13])
+    ,(341550071728321,[2,3,5,7,11,13,17])
+    ]
