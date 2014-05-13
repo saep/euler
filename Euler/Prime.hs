@@ -48,14 +48,14 @@ log' b = floor . logBase base . fi
         base = fi b :: Double
 
 isPrime :: Int -> Bool
-isPrime n = n /= 1 && foldr test True [2..sqrt' n]
+isPrime n = n /= 1 && foldr test True (takeWhile (\p -> p*p <= n) (2:[3,5..]))
   where
     test d r = n `mod` d /= 0 && r
 
 -- | Check for primality using the 'primes' stream from this module.  This will
 -- be faster in the long run if you do a lot of prime checks.
 isPrime' :: Int -> Bool
-isPrime' n = n /= 1 && foldr test True (takeWhile (<= sqrt' n) primes)
+isPrime' n = n /= 1 && foldr test True (takeWhile (\p -> p*p <= n) primes)
     where
         test d r = n `mod` d /= 0 && r
 
@@ -73,7 +73,7 @@ factorizeSingleNumber = f [] 2
   where
     f ps p n
       | r == 0      = f (p:ps) p d
-      | p > sqrt' n = reverse (n:ps)
+      | p*p >     n = reverse (n:ps)
       | otherwise   = f ps (p+1) n
       where
         (d,r) = n `divMod` p
@@ -81,13 +81,13 @@ factorizeSingleNumber = f [] 2
 -- | Prime factorization of the given integer using the 'primes' list of this
 -- module.
 factors :: Int -> [Int]
-factors x = f (sqrt' x) primes x
+factors x = f primes x
   where
-    f :: Int-> [Int] -> Int -> [Int]
-    f sqrtn (p:ps) n
-      | p > sqrtn  = [ n | n > 1 ]
-      | r == 0 = p : f (sqrt' d) (p:ps) d
-      | otherwise = f sqrtn ps n
+    f :: [Int] -> Int -> [Int]
+    f (p:ps) n
+      | p*p > n   = [ n | n > 1 ]
+      | r == 0    = p : f (p:ps) d
+      | otherwise = f ps n
       where
         (d,r) = n `divMod` p
 
@@ -99,8 +99,8 @@ eulerPhi n =
 -- | Calculate the sum of divisors for the given number.
 sumOfDivisors :: Int -> Int
 sumOfDivisors n =
-    let fs = factors n
-    in product . fmap ((+1) . sum . zipWith (flip (^)) ([1..] :: [Int])) $ group fs
+    let fs = group $ factors n
+    in product $ fmap ((+1) . sum . zipWith (flip (^)) ([1..] :: [Int])) fs
 
 -- | Calculate the sum of proper divisors of the given number.
 sumOfProperDivisors :: Int -> Int
