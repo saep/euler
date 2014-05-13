@@ -47,3 +47,4 @@ nextSprialWithPrimePercentage (pl, pp) =
         cns = filter isPrime' $ fmap (\i -> pl*pl + i*(pl+1)) [1,2,3]
         pp' = length cns + pp
     in (pl', pp')
+

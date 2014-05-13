@@ -59,16 +59,18 @@ import qualified Euler.P056
 import qualified Euler.P057
 import qualified Euler.P058
 
-import qualified Euler.PrimeTest
+import qualified Euler.PrimeTest as PT
 
 import           Test.Framework                 hiding (Test)
 import           Test.Framework.Providers.HUnit
+import           Test.Framework.Providers.QuickCheck2
 import           Test.HUnit
 
 main :: IO ()
 main = Test.Framework.defaultMain
     [ testGroup "Problem result tests" (hUnitTestToTests (test tests))
-    , testGroup "Prime module tests" (hUnitTestToTests Euler.PrimeTest.tests)
+    , testGroup "Prime module tests" (hUnitTestToTests PT.tests)
+    , testProperty "Prime module [powMod]" PT.powModEqualsNaiveMethod
     ]
 
 tests :: [Test]

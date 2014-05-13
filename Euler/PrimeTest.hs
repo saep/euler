@@ -11,11 +11,13 @@ Portability :  portable
 -}
 module Euler.PrimeTest
        ( tests
+       , powModEqualsNaiveMethod
        ) where
 
 import           Euler.Prime
 
 import           Test.HUnit
+import           Test.QuickCheck
 
 tests :: Test
 tests = TestList [ TestLabel "Atkin test " testAtkin
@@ -37,4 +39,18 @@ testAtkin =
 testMillerRabin :: Test
 testMillerRabin = TestCase $
     mapM_ (\(x,b) -> assertBool ("prime test failed for: " ++ show x) b)
-        [ (x,isPrimeMillerRabin x == isPrimeA x) | x <- [1..28123] ]
+        [ (x,isPrimeMillerRabin (toInteger x) == isPrimeA x) | x <- [1..28123] ]
+
+fi :: (Num b, Integral a) => a -> b
+fi = fromIntegral
+
+powModEqualsNaiveMethod :: Positive Integer
+                        -> Positive Integer
+                        -> Positive Integer
+                        -> Bool
+powModEqualsNaiveMethod m b e =
+    let m' = fi m
+        b' = fi b
+        e' = fi e
+    in powMod m' b' e' == b'^e' `mod` m'
+

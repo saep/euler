@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 module Euler.Prime
        ( sqrt'
        , factorizeSingleNumber
@@ -15,9 +16,13 @@ module Euler.Prime
        , atkin
        , isPrimeS
        , isPrimeMillerRabin
+#ifdef HTEST
+       , powMod
+#endif
        ) where
 
 import           Control.Monad
+import           Data.Bits
 import           Data.List
 import           Data.Ratio
 import           Euler.SList
@@ -28,16 +33,19 @@ import qualified Data.IntMap as M
 
 import           Control.Monad.Primitive
 
+fi :: (Integral n, Num n') => n -> n'
+fi = fromIntegral
+
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
-sqrt' = floor . (sqrt :: Double -> Double) . fromIntegral
+sqrt' = floor . (sqrt :: Double -> Double) . fi
 
 -- | Take the logarithm from the given integral for base b value and round it
 -- down.
 log' :: (Integral b, Integral n) => b -> n -> n
-log' b = floor . logBase base . fromIntegral
+log' b = floor . logBase base . fi
     where
-        base = fromIntegral b :: Double
+        base = fi b :: Double
 
 isPrime :: Int -> Bool
 isPrime n = n /= 1 && foldr test True [2..sqrt' n]
@@ -175,15 +183,16 @@ eliminateComposites v limit n = do
     pn <- VM.unsafeRead v n
     when pn $ forM_ [n*n,2*n*n..limit] $ \i -> VM.unsafeWrite v i False
 
-isPrimeMillerRabin :: Int -> Bool
+isPrimeMillerRabin :: Integer -> Bool
 isPrimeMillerRabin n
     | n < 4 = n == 2 || n == 3
-    | otherwise = let ws = maybe (requiredValues n) snd $ M.lookupGT n witnesses
-                      fp = find2sd (toInteger n-1)
-                  in not $ (testMillerRabin (toInteger n) ws) fp
+    | otherwise = let ws = maybe (requiredValues n) snd
+                            $ M.lookupGT (fi n) witnesses
+                      fp = find2sd (n-1)
+                  in not $ (testMillerRabin n ws) fp
 
 -- | Find @s@ and @d@, so that d*2^s = m
-find2sd :: Integral a => a -> (a,a)
+find2sd :: Integer -> (Integer,Integer)
 find2sd = f 0
     where
         f s d
@@ -192,19 +201,27 @@ find2sd = f 0
                 where
                     (q,r) = d `quotRem` 2
 
+powMod :: Integer -> Integer -> Integer -> Integer
+powMod m base ex = f 1 (base `mod` m) ex
+    where
+        f acc _ 0 = acc
+        f acc b e = let acc' = if testBit e 0 then (acc*b) `mod` m else acc
+                        b' = (b*b) `mod` m
+                    in f acc' b' (shiftR e 1)
+
 testMillerRabin :: Integer -> [Integer] -> (Integer, Integer) -> Bool
 testMillerRabin n ws (s,d) = foldr test False ws
     where
-        test a b = (a^d) `mod` n /= 1
-                    && all (\r -> (a^(d * (2^r))) `mod` n /= n-1) [0..s-1]
+        test a b = powMod n a d /= 1
+                    && all (\r -> powMod n a (d * r) /= n-1) (fmap (shiftL 1) [0..fi s-1])
                     || b
 
-requiredValues :: Int -> [Integer]
+requiredValues :: Integer -> [Integer]
 requiredValues n =
-    let ub = min (toInteger n-1) $ floor (2 * ((log . fromIntegral) n)**2)
+    let ub = min (n-1) $ floor (2 * ((log . fi) n)**2)
     in [2..ub]
 
-witnesses :: M.IntMap [Integer]
+witnesses :: Integral witness => M.IntMap [witness]
 witnesses = M.fromList $
     [(1373653, [2,3])
     ,(9080191, [31,73])
@@ -214,3 +231,4 @@ witnesses = M.fromList $
     ,(3474749660383,[2,3,5,7,11,13])
     ,(341550071728321,[2,3,5,7,11,13,17])
     ]
+
