@@ -190,7 +190,7 @@ find2sd = f 0
             | r == 1 = (s,d)
             | otherwise = f (s+1) q
                 where
-                    (q,r) = d `divMod` 2
+                    (q,r) = d `quotRem` 2
 
 testMillerRabin :: Integer -> [Integer] -> (Integer, Integer) -> Bool
 testMillerRabin n ws (s,d) = foldr test False ws

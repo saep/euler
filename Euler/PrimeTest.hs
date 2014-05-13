@@ -13,7 +13,6 @@ module Euler.PrimeTest
        ( tests
        ) where
 
-import qualified Data.Vector.Unboxed as V
 import           Euler.Prime
 
 import           Test.HUnit
@@ -23,15 +22,19 @@ tests = TestList [ TestLabel "Atkin test " testAtkin
                  , TestLabel "Miller rabin primality test " testMillerRabin
                  ]
 
+atkinSieve :: PrimeSieve
+atkinSieve = atkin 28123
+
+isPrimeA :: Int -> Bool
+isPrimeA = isPrimeS atkinSieve
+
 testAtkin :: Test
 testAtkin =
-    let a = atkin 28123
-        isPrimeA n = a V.! n
-    in TestCase $
+    TestCase $
         mapM_ (\(x,b) -> assertBool ("prime test failed for : " ++ show x) b)
             [ (x,isPrimeA x == isPrime x) | x <- [1..28123] ]
 
 testMillerRabin :: Test
 testMillerRabin = TestCase $
     mapM_ (\(x,b) -> assertBool ("prime test failed for: " ++ show x) b)
-        [ (x,isPrimeMillerRabin x == isPrime x) | x <- [1..28123] ]
+        [ (x,isPrimeMillerRabin x == isPrimeA x) | x <- [1..28123] ]
