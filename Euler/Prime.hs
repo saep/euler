@@ -183,7 +183,7 @@ eliminateComposites v limit n = do
     pn <- VM.unsafeRead v n
     when pn $ forM_ [n*n,2*n*n..limit] $ \i -> VM.unsafeWrite v i False
 
-isPrimeMillerRabin :: Integer -> Bool
+isPrimeMillerRabin :: (Bits n, Integral n) => n -> Bool
 isPrimeMillerRabin n
     | n < 4 = n == 2 || n == 3
     | otherwise = let ws = maybe (requiredValues n) snd
@@ -192,7 +192,7 @@ isPrimeMillerRabin n
                   in not $ (testMillerRabin n ws) fp
 
 -- | Find @s@ and @d@, so that d*2^s = m
-find2sd :: Integer -> (Integer,Integer)
+find2sd :: (Bits n, Integral n) => n -> (n,n)
 find2sd = f 0
     where
         f s d
@@ -201,7 +201,7 @@ find2sd = f 0
                 where
                     (q,r) = d `quotRem` 2
 
-powMod :: Integer -> Integer -> Integer -> Integer
+powMod :: (Bits n, Integral n) => n -> n -> n -> n
 powMod m base ex = f 1 (base `mod` m) ex
     where
         f acc _ 0 = acc
@@ -209,14 +209,14 @@ powMod m base ex = f 1 (base `mod` m) ex
                         b' = (b*b) `mod` m
                     in f acc' b' (shiftR e 1)
 
-testMillerRabin :: Integer -> [Integer] -> (Integer, Integer) -> Bool
+testMillerRabin :: (Bits n, Integral n) => n -> [n] -> (n, n) -> Bool
 testMillerRabin n ws (s,d) = foldr test False ws
     where
         test a b = powMod n a d /= 1
                     && all (\r -> powMod n a (d * r) /= n-1) (fmap (shiftL 1) [0..fi s-1])
                     || b
 
-requiredValues :: Integer -> [Integer]
+requiredValues :: (Bits n, Integral n) => n -> [n]
 requiredValues n =
     let ub = min (n-1) $ floor (2 * ((log . fi) n)**2)
     in [2..ub]

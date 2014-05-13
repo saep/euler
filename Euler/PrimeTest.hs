@@ -49,8 +49,8 @@ powModEqualsNaiveMethod :: Positive Integer
                         -> Positive Integer
                         -> Bool
 powModEqualsNaiveMethod m b e =
-    let m' = fi m
-        b' = fi b
-        e' = fi e
+    let m' = fi m :: Integer
+        b' = fi b :: Integer
+        e' = fi e :: Integer
     in powMod m' b' e' == b'^e' `mod` m'
 
