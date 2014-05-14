@@ -47,15 +47,22 @@ log' b = floor . logBase base . fi
     where
         base = fi b :: Double
 
+-- | This brute-force prime test function is fairly efficient for small numbers
+-- and if you do not need to query a lot of primes. Otherwise it is probably
+-- better to use the miller rabin variant, especially for big numbers, or the
+-- other 'isPrime''.
 isPrime :: Int -> Bool
-isPrime n = n /= 1 && foldr test True (takeWhile (\p -> p*p <= n) (2:[3,5..]))
-  where
-    test d r = n `mod` d /= 0 && r
+isPrime n = checkPrimality (takeWhile (\p -> p*p <= n) (2:[3,5..])) n
 
 -- | Check for primality using the 'primes' stream from this module.  This will
 -- be faster in the long run if you do a lot of prime checks.
 isPrime' :: Int -> Bool
-isPrime' n = n /= 1 && foldr test True (takeWhile (\p -> p*p <= n) primes)
+isPrime' n = checkPrimality (takeWhile (\p -> p*p <= n) primes) n
+
+-- | Generic helper function to test the primality of a number by trial and
+-- error division for all elements in the given list.
+checkPrimality :: Integral n => [n] -> n -> Bool
+checkPrimality ls n = n /= 1 && foldr test True ls
     where
         test d r = n `mod` d /= 0 && r
 
@@ -185,11 +192,12 @@ eliminateComposites v limit n = do
 
 isPrimeMillerRabin :: (Bits n, Integral n) => n -> Bool
 isPrimeMillerRabin n
-    | n < 4 = n == 2 || n == 3
-    | otherwise = let ws = maybe (requiredValues n) snd
-                            $ M.lookupGT (fi n) witnesses
-                      fp = find2sd (n-1)
-                  in not $ (testMillerRabin n ws) fp
+    | n < 4000 = isPrime' (fromIntegral n)
+    | otherwise =
+        let ws = maybe (requiredValues n) snd $ M.lookupGT (fi n) witnesses
+            fp = find2sd (n-1)
+        in checkPrimality (takeWhile (< 200) primes) (fromIntegral n) &&
+            (not . testMillerRabin n ws) fp
 
 -- | Find @s@ and @d@, so that d*2^s = m
 find2sd :: (Bits n, Integral n) => n -> (n,n)
@@ -213,12 +221,13 @@ testMillerRabin :: (Bits n, Integral n) => n -> [n] -> (n, n) -> Bool
 testMillerRabin n ws (s,d) = foldr test False ws
     where
         test a b = powMod n a d /= 1
-                    && all (\r -> powMod n a (d * r) /= n-1) (fmap (shiftL 1) [0..fi s-1])
+                    && all (\r -> powMod n a (d * r) /= n-1) (fmap (shiftL 1) [fi s-1,fi s-2..0])
                     || b
 
 requiredValues :: (Bits n, Integral n) => n -> [n]
 requiredValues n =
-    let ub = min (n-1) $ floor (2 * ((log . fi) n)**2)
+    let lnn = (log . fi) n :: Double
+        ub = min (n-1) $ floor (2 * lnn * lnn)
     in [2..ub]
 
 witnesses :: Integral witness => M.IntMap [witness]
