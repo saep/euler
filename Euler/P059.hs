@@ -53,8 +53,6 @@ solve = do
     ct <- readCipherText
     dict <- readDictionary
     let text = decrypt ct $ findPassword dict ct
-    putStr text
-    putStrLn ""
     return . sum $ fmap ord text
 
 readCipherText :: IO [Int]
