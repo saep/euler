@@ -156,10 +156,24 @@ atkin limit = V.create $ do
 
     let sqrtLimit = sqrt' limit
 
-    mapM_ (flipEntries v limit) [ (x,y)
-                                | x <- [1..sqrtLimit]
-                                , y <- [1..sqrtLimit]
-                                ]
+    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
+                            , y <- [1..sqrtLimit]
+                            , let n = 4*x*x + y*y
+                            , n <= limit
+                            , let r = n `mod` 12 in r == 1 || r == 5
+                            ]
+    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
+                            , y <- [1..sqrtLimit]
+                            , let n = 3*x*x + y*y
+                            , n <= limit
+                            , let r = n `mod` 12 in r == 7
+                            ]
+    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
+                            , y <- [1..x-1]
+                            , let n = 3*x*x - y*y
+                            , n <= limit
+                            , let r = n `mod` 12 in r == 11
+                            ]
 
     mapM_ (eliminateComposites v limit) [5..sqrtLimit]
 
@@ -168,19 +182,9 @@ atkin limit = V.create $ do
     return v
 
 flipEntries :: PrimMonad m => VM.MVector (PrimState m) Bool
-            -> Int
-            -> (Int, Int)
-            -> m ()
-flipEntries v limit (x,y) = do
-    let n = 4*x*x + y*y
-    when (n <= limit && (n `mod` 12) `elem` [1,5])
-        $ VM.unsafeWrite v n . not =<< VM.unsafeRead v n
-    let o = n - x*x
-    when (o <= limit && (o `mod` 12) == 7)
-        $ VM.unsafeWrite v o . not =<< VM.unsafeRead v o
-    let p = o - 2*y*y
-    when (x > y && p <= limit && p `mod` 12 == 11)
-        $ VM.unsafeWrite v p . not =<< VM.unsafeRead v p
+              -> Int
+              -> m ()
+flipEntries v n = VM.unsafeWrite v n . not =<< VM.unsafeRead v n
 
 eliminateComposites :: PrimMonad m => VM.MVector (PrimState m) Bool
                     -> Int
