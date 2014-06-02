@@ -2,3 +2,4 @@
 *.o
 *.prof
 dist/
+.cabal-sandbox/
