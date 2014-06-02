@@ -36,6 +36,9 @@ import           Control.Monad.Primitive
 fi :: (Integral n, Num n') => n -> n'
 fi = fromIntegral
 
+square :: Integral n => n -> n
+square n = n*n
+
 -- | Take the sqrt from the given integer value and round it down.
 sqrt' :: Integral n => n -> n
 sqrt' = floor . (sqrt :: Double -> Double) . fi
@@ -156,24 +159,27 @@ atkin limit = V.create $ do
 
     let sqrtLimit = sqrt' limit
 
-    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
-                            , y <- [1..sqrtLimit]
-                            , let n = 4*x*x + y*y
-                            , n <= limit
-                            , let r = n `mod` 12 in r == 1 || r == 5
-                            ]
-    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
-                            , y <- [1..sqrtLimit]
-                            , let n = 3*x*x + y*y
-                            , n <= limit
-                            , let r = n `mod` 12 in r == 7
-                            ]
-    mapM_ (flipEntries v) [ n | x <- [1..sqrtLimit]
-                            , y <- [1..x-1]
-                            , let n = 3*x*x - y*y
-                            , n <= limit
-                            , let r = n `mod` 12 in r == 11
-                            ]
+    mapM_ (flipEntries v)
+        [ n | _4x2 <- takeWhile (<limit) $ map (flip shiftL 2 . square) [1..]
+        , y2 <- takeWhile (<= limit - _4x2) $ map square [1..]
+        , let n = _4x2 + y2
+        , not (testBit n 1) && testBit n 0 && n `mod` 12 /= 9
+        ]
+
+    mapM_ (flipEntries v)
+        [ n | _3x2 <- takeWhile (<limit) $ map ((3*) . square) [1..]
+        , y2 <- takeWhile (<= limit - _3x2) $ map square [1..]
+        , let n = _3x2 + y2
+        , n `mod` 12 == 7
+        ]
+
+    mapM_ (flipEntries v)
+        [ n | let l = ceiling $ sqrt (fromIntegral limit / 2)
+        , x <- [2..l]
+        , let _3x2 = 3*x*x
+        , n <- takeWhile (<= limit) $ map (\y -> _3x2 - square y) [x-1,x-2..1]
+        , n `mod` 12 == 11
+        ]
 
     mapM_ (eliminateComposites v limit) [5..sqrtLimit]
 
