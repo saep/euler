@@ -44,6 +44,9 @@ import Data.Vector ((!),Vector)
 import qualified Data.Vector as Vector
 import Euler.Numbers
 
+solve :: Monad m => m Int
+solve = return $ sum findCyclicSet
+
 -- Create some lookup arrays which contain lists of numbers for every two-digit
 -- number.
 mkVector :: [Int] -> Vector [Int]
@@ -58,16 +61,17 @@ mkVector = Vector.fromList . construct 0
         | i > 99 = []
         | otherwise = [] : construct (i+1) []
 
-gonals :: [Vector [Int]]
-gonals = mkVector <$> [ triangulars, scanl1 (+) [1,3..], pentagonals
-                    , hexagonals, heptagonals, octagonals ]
+triangularVector :: Vector [Int]
+triangularVector = mkVector triangulars
 
-solve :: Monad m => m Int
-solve = return $ sum findCyclicSet
+gonals :: [Vector [Int]]
+gonals = mkVector <$> [ scanl1 (+) [1,3..], pentagonals
+                      , hexagonals, heptagonals, octagonals ]
 
 findCyclicSet :: [Int]
-findCyclicSet = head . filter (\xs -> length xs == 6)
-    . concatMap (\ns -> convertToNums (last ns) <$> findCyclicSet' [10..99] ns)
+findCyclicSet = head . filter ((6==) . length)
+    . concatMap (fmap (convertToNums triangularVector)
+                 . findCyclicSet' [10..99] . (++[triangularVector]))
     $ permutations gonals
 
 convertToNums :: Vector [Int] -> [Int] -> [Int]
