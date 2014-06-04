@@ -21,8 +21,15 @@ module Euler.Numbers
        , toNum
        , pythagoreanTriplets
        , pentagonal
+       , pentagonals
        , triangular
+       , triangulars
        , hexagonal
+       , hexagonals
+       , heptagonal
+       , heptagonals
+       , octagonal
+       , octagonals
        , module Control.Monad.State
        ) where
 
@@ -123,12 +130,35 @@ pythagoreanTriplets = go 3 2
         b k = k*2*m*n
         c k = k*(m*m + n*n)
 
-pentagonal :: Integral a => a -> a
-pentagonal n = n * (3*n - 1) `div` 2
-
 -- | sum_{k=1}^n k
-triangular :: Integral a => a -> a
+triangular :: Integral n => n -> n
 triangular n = n * (n+1) `div` 2
 
-hexagonal :: Integral a => a -> a
+triangulars :: Integral n => [n]
+triangulars = scanl1 (+) [1..]
+
+-- | n(3n-1)/2
+pentagonal :: Integral n => n -> n
+pentagonal n = n * (3*n - 1) `div` 2
+
+pentagonals :: Integral n => [n]
+pentagonals = scanl1 (+) [1,4..]
+
+hexagonal :: Integral n => n -> n
 hexagonal n = n*(2*n-1)
+
+hexagonals :: Integral n => [n]
+hexagonals = scanl1 (+) [1,5..]
+
+heptagonal :: Integral n => n -> n
+heptagonal n = n*(5*n-3)`div`2
+
+heptagonals :: Integral n => [n]
+heptagonals = scanl1 (+) [1,6..]
+
+octagonal :: Integral n => n -> n
+octagonal n = n*(3*n-2)
+
+octagonals :: Integral n => [n]
+octagonals = scanl1 (+) [1,7..]
+
