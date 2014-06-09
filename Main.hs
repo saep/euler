@@ -76,6 +76,7 @@ import qualified Euler.P058
 import qualified Euler.P059
 import qualified Euler.P060
 import qualified Euler.P061
+import qualified Euler.P062
 
 import qualified Data.IntMap         as M
 import           Options.Applicative
@@ -165,4 +166,5 @@ problems = M.fromAscList $
                  , Euler.P059.solve
                  , Euler.P060.solve
                  , Euler.P061.solve
+                 , Euler.P062.solve
                  ]
