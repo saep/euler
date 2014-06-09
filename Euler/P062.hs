@@ -22,10 +22,10 @@ module Euler.P062
        ( solve
        ) where
 
-import Control.Applicative
-import Data.Function (on)
-import Data.List (sort, sortBy, groupBy)
-import Euler.Numbers (toDigits)
+import           Control.Applicative
+import           Data.Function       (on)
+import           Data.List           (groupBy, sort, sortBy)
+import           Euler.Numbers       (toDigits)
 
 solve :: Monad m => m Int
 solve = return $ findCubicNPermutation 5
