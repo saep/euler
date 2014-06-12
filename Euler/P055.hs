@@ -44,7 +44,7 @@ module Euler.P055
        ) where
 
 solve :: Monad m => m Int
-solve = return $ length [ () | x <- [6..9999], (not . isLychrel) x ]
+solve = return . length $ filter (not . isLychrel) [6..9999]
 
 
 isLychrel :: Integer -> Bool
