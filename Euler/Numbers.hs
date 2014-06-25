@@ -31,6 +31,7 @@ module Euler.Numbers
        , octagonal
        , octagonals
        , continuedFractions
+       , continuedFractionExpansion
        , module Control.Monad.State
        ) where
 
@@ -39,6 +40,7 @@ import           Control.Monad.State
 import qualified Data.IntMap         as M
 import           Data.List           (foldl')
 import           Data.Maybe
+import           Data.Ratio
 import           Euler.Prime
 import           Euler.SList
 
@@ -182,4 +184,12 @@ continuedFractions s = go [] $ iterate next (0,1,a0)
                        d' = (s - m' * m') `div` d
                        a' = (a0 + m') `div` d'
                    in (m',d',a')
+
+-- | Calculate the @i@th (1-based) fraction expansion for the given tuple of a
+-- non-coninued fraction and a continued fraction as returned by
+-- 'continuedFractions'.
+continuedFractionExpansion :: ([Int], [Int]) -> Int -> Ratio Integer
+continuedFractionExpansion (ns, rs) i =
+    let (a:as) = map toInteger . reverse . take i $ ns ++ concat (repeat rs)
+    in foldl' (\y x -> (x%1) + 1/y) (a%1) as
 
