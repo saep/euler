@@ -30,6 +30,7 @@ module Euler.Numbers
        , heptagonals
        , octagonal
        , octagonals
+       , continuedFractions
        , module Control.Monad.State
        ) where
 
@@ -161,4 +162,24 @@ octagonal n = n*(3*n-2)
 
 octagonals :: Integral n => [n]
 octagonals = scanl1 (+) [1,7..]
+
+continuedFractions :: Int -> ([Int], [Int])
+continuedFractions s = go [] $ iterate next (0,1,a0)
+  where
+    a0 = sqrt' s
+
+    _3 (_,_,a) = a
+
+    go :: [(Int, Int, Int)] -> [(Int, Int, Int)] -> ([Int], [Int])
+    go cs ~(x:xs)
+        | x `elem` cs = (\(n,p) -> (map _3 n, map _3 p))
+                        . span (/=x) $ reverse cs
+        | otherwise = go (x:cs) xs
+
+
+    next :: (Int, Int, Int) -> (Int, Int, Int)
+    next (m,d,a) = let m' = d * a - m
+                       d' = (s - m' * m') `div` d
+                       a' = (a0 + m') `div` d'
+                   in (m',d',a')
 
