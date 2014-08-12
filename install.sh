@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# Script that is primarily written to be used on a jenkins CI. However, this
+# should also work locally.
+#
 
 if [ ! -x "$HOME/.cabal/bin/cabal" ] ; then
     echo "Cabal with sandbox support (probably) not installed."
