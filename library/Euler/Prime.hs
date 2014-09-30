@@ -31,8 +31,6 @@ import qualified Data.Vector.Unboxed         as V
 import qualified Data.Vector.Unboxed.Mutable as VM
 import qualified Data.IntMap as M
 
-import           Control.Monad.Primitive
-
 fi :: (Integral n, Num n') => n -> n'
 fi = fromIntegral
 
@@ -187,15 +185,8 @@ atkin limit = V.create $ do
     VM.unsafeWrite v 3 True
     return v
 
-flipEntries :: PrimMonad m => VM.MVector (PrimState m) Bool
-              -> Int
-              -> m ()
 flipEntries v n = VM.unsafeWrite v n . not =<< VM.unsafeRead v n
 
-eliminateComposites :: PrimMonad m => VM.MVector (PrimState m) Bool
-                    -> Int
-                    -> Int
-                    -> m ()
 eliminateComposites v limit n = do
     pn <- VM.unsafeRead v n
     when pn $ forM_ [n*n,2*n*n..limit] $ \i -> VM.unsafeWrite v i False

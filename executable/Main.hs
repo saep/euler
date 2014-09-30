@@ -83,20 +83,36 @@ import qualified Euler.P065
 
 import qualified Data.IntMap         as M
 import           Options.Applicative
+import           System.Exit
 
-data Options = Options { problem :: Int }
+data Options = Options
+    { problem :: Int
+    , justSolution :: Bool
+    }
 
 prettySolution :: Options -> IO ()
-prettySolution (Options { problem = i}) = do
-    putStr $ "Project Euler solution for riddle " ++ show i ++ ": "
-    maybe (print "Solution not available.") (print =<<) $ M.lookup i problems
+prettySolution opts
+    | justSolution opts =
+        maybe
+            (putStr "error \"nov available\"" >> exitWith (ExitFailure 1))
+            (print =<<)
+            $ M.lookup (problem opts) problems
+    | otherwise = do
+        let p = problem opts
+        putStr $ "Project Euler solution for riddle " ++ show p ++ ": "
+        maybe (print "Solution not available.") (print =<<) $ M.lookup p problems
 
 optionParser :: Parser Options
-optionParser = Options <$> option
+optionParser = Options
+    <$> option
         (long "problem"
         <> short 'p'
         <> metavar "N"
         <> help "Problem number to test.")
+    <*> switch
+        (long "quiet"
+        <> short 'q'
+        <> help "Just print the solution without being pretty")
 
 main :: IO ()
 main = execParser opts >>= prettySolution
