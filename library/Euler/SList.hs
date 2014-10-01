@@ -1,18 +1,3 @@
-{- |
-Module      :  Euler.SList
-Description :  The general list functions for sorted lists
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-This module contains functions from Data.List which are hand-tailored
-for sorted lists. They all posess the prefix 's' so that this module
-does not need to be imported qualified.
--}
-
 module Euler.SList
        ( sremoveAll
        , sremoveFirst

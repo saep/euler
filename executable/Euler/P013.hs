@@ -1,18 +1,3 @@
-{- |
-Module      :  Euler.P013
-Description :  Problem 13
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-Large sum
-Problem 13
-
-Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
--}
 module Euler.P013
        ( solve
        ) where

@@ -1,15 +1,3 @@
-{- |
-Module      :  Euler.Numbers
-Description :  Number theoretic functions
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-This module gather number theoretic functions.
--}
 module Euler.Numbers
        ( WithDivisors
        , initialWithDivisorsState

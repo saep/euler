@@ -1,14 +1,3 @@
-{- |
-Module      :  Euler.P064
-Description :  Problem 64
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
--}
 module Euler.P064
        ( solve
        ) where

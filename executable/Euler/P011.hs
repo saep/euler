@@ -1,25 +1,3 @@
-{- |
-Module      :  Euler.P011
-Description :  Problem 11
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-In the $20 \times 20$ grid below, four numbers along a diagonal line
-have been marked in red.
-
-<- stored in text/P011.txt ->
-
-The product of these numbers is $26 × 63 × 78 × 14 = 1788696$.
-
-What is the greatest product of four adjacent numbers in the same
-direction (up, down, left, right, or diagonally) in the $20 \times
-20$ grid?
-
--}
 module Euler.P011
        ( solve
        ) where

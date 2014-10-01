@@ -1,16 +1,3 @@
-{- |
-Module      :  Main
-Description :  Main module which allows access to all project euler riddles.
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-This module gives convenient access to calculate the solution for any
-exisiting and solved project euler riddle.  -}
-
 module Main
        ( main
        ) where

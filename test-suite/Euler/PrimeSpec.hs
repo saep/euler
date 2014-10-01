@@ -1,14 +1,3 @@
-{- |
-Module      :  Euler.PrimeTest
-Description :  Test cases for the Euler.Prime module
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
--}
 module Euler.PrimeSpec
        ( spec
        ) where

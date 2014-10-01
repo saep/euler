@@ -1,20 +1,3 @@
-{- |
-Module      :  Euler.P063
-Description :  Problem 63
-Copyright   :  (c) Sebastian Witte
-License     :  WTFPL
-
-Maintainer  :  woozletoff@gmail.com
-Stability   :  experimental
-Portability :  portable
-
-Powerful digit counts
-
-The 5-digit number, 16807=7^5, is also a fifth power. Similarly, the 9-digit
-number, 134217728=8^9, is a ninth power.
-
-How many n-digit positive integers exist which are also an nth power?
--}
 module Euler.P063
        ( solve
        ) where
