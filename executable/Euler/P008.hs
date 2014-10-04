@@ -11,4 +11,4 @@ solve = filter isDigit <$> readFile "text/P008.txt" >>=
 
 biggestProduct :: Int -> [Int] -> Int
 biggestProduct mp [] = mp
-biggestProduct mp ns = biggestProduct ((max mp . product . take 5) ns) (tail ns)
+biggestProduct mp ns = biggestProduct ((max mp . product . take 13) ns) (tail ns)

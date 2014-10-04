@@ -8,4 +8,4 @@ import Test.Hspec
 spec :: Spec
 spec = describe "Solution for Problem 008" $ do
            it "returns" $ do
-               solve `shouldReturn` 40824
+               solve `shouldReturn` 23514624000
