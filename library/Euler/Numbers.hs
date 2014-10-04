@@ -174,7 +174,7 @@ continuedFractions s = go [] $ iterate next (0,1,a0)
                    in (m',d',a')
 
 -- | Calculate the @i@th (1-based) fraction expansion for the given tuple of a
--- non-coninued fraction and a continued fraction as returned by
+-- non-continued fraction and a continued fraction as returned by
 -- 'continuedFractions'.
 continuedFractionExpansion :: ([Int], [Int]) -> Int -> Ratio Integer
 continuedFractionExpansion (ns, rs) i =

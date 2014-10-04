@@ -35,9 +35,3 @@ gcf a b
   | otherwise = gcf b (a `mod` b)
 
 
--- | Calculate the nth triangular number.
-triangularNumber :: Integral a => a -> a
-triangularNumber n = n * (n+1) `div` 2
-
-triangularNumbers :: [Integer]
-triangularNumbers = scanl1 (+) [1..]
